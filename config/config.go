@@ -6,14 +6,14 @@ import (
 )
 
 type Config struct {
-	Target  string `json:"target"`
+	Target  string `yaml:"target"`
 	Enabled struct {
-		Curse   bool `json:"curse"`
-		Paper   bool `json:"paper"`
-		Purpur  bool `json:"purpur"`
-		Forge   bool `json:"forge"`
-		Fabric  bool `json:"fabric"`
-		Bedrock bool `json:"bedrock"`
+		Curse   bool `yaml:"curse"`
+		Paper   bool `yaml:"paper"`
+		Purpur  bool `yaml:"purpur"`
+		Forge   bool `yaml:"forge"`
+		Fabric  bool `yaml:"fabric"`
+		Bedrock bool `yaml:"bedrock"`
 	}
 	Curse struct {
 		APIkey   string `yaml:"apikey"`
