@@ -11,6 +11,7 @@ type Config struct {
 		Curse   bool `yaml:"curse"`
 		Paper   bool `yaml:"paper"`
 		Purpur  bool `yaml:"purpur"`
+		Spigot  bool `yaml:"spigot"`
 		Forge   bool `yaml:"forge"`
 		Fabric  bool `yaml:"fabric"`
 		Bedrock bool `yaml:"bedrock"`
@@ -23,6 +24,9 @@ type Config struct {
 		Version string `yaml:"version"`
 	}
 	Purpur struct {
+		Version string `yaml:"version"`
+	}
+	Spigot struct {
 		Version string `yaml:"version"`
 	}
 	Forge struct {

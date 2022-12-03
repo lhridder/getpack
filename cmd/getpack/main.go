@@ -8,6 +8,7 @@ import (
 	"getpack/sources/forge"
 	"getpack/sources/paper"
 	"getpack/sources/purpur"
+	"getpack/sources/spigot"
 	"log"
 	"os"
 )
@@ -67,6 +68,23 @@ func getVersions() error {
 		err = os.RemoveAll("purpurinstaller")
 		if err != nil {
 			return fmt.Errorf("failed to delete purpurinstaller folder: %s", err)
+		}
+	}
+
+	if cfg.Enabled.Spigot {
+		err = spigot.Get()
+		if err != nil {
+			log.Printf("failed to get spigot: %s", err)
+		}
+
+		err = os.Chdir(dir)
+		if err != nil {
+			return fmt.Errorf("failed to change directories to home: %s", err)
+		}
+
+		err = os.RemoveAll("spigotinstaller")
+		if err != nil {
+			return fmt.Errorf("failed to delete spigotinstaller folder: %s", err)
 		}
 	}
 
