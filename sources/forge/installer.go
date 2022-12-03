@@ -34,7 +34,7 @@ func Get() error {
 
 	output, err := exec.Command("java", "-jar", "forge-installer.jar", "--installServer").Output()
 	if err != nil {
-		log.Println(output)
+		log.Println(string(output))
 		return fmt.Errorf("failed to run installer: %s", err)
 	}
 

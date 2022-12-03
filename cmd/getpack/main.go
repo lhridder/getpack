@@ -39,7 +39,7 @@ func getVersions() error {
 	if cfg.Enabled.Paper {
 		err = paper.Get()
 		if err != nil {
-			return fmt.Errorf("failed to get paper: %s", err)
+			log.Printf("failed to get paper: %s", err)
 		}
 
 		err = os.Chdir(dir)
@@ -57,7 +57,7 @@ func getVersions() error {
 	if cfg.Enabled.Purpur {
 		err = purpur.Get()
 		if err != nil {
-			return fmt.Errorf("failed to get purpur: %s", err)
+			log.Printf("failed to get purpur: %s", err)
 		}
 
 		err = os.Chdir(dir)
@@ -91,7 +91,7 @@ func getVersions() error {
 	if cfg.Enabled.Forge {
 		err = forge.Get()
 		if err != nil {
-			return fmt.Errorf("failed to get forge: %s", err)
+			log.Printf("failed to get forge: %s", err)
 		}
 
 		err = os.Chdir(dir)
@@ -110,10 +110,10 @@ func getVersions() error {
 		if err == nil {
 			err = fabric.Install(url)
 			if err != nil {
-				return fmt.Errorf("failed to install fabric: %s", err)
+				log.Printf("failed to install fabric: %s", err)
 			}
 		} else {
-			return fmt.Errorf("failed to fabric installer: %s", err)
+			log.Printf("failed to fabric installer: %s", err)
 		}
 
 		err = os.Chdir(dir)
