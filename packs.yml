@@ -1,0 +1,35 @@
+packs:
+  #technic
+  1935271: #pixelmonreforged
+    - deletereg:^RestoreBackup
+    - deletereg:^LaunchServer
+    - renamereg:^forge-:server.jar
+  552560: #tekkit2
+    - deletereg:^launch
+    - rename:Tekkit.jar:server.jar
+  1150447: #tekkit
+    - deletereg:^Install
+    - deletereg:^settings
+    - deletereg:^ServerStart
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - deletereg:installer.jar.log$
+    - renamereg:^forge-:server.jar
+  #curse
+  353156: #1.12.2pack
+    - deletereg:^RestoreBackup
+    - deletereg:^LaunchServer
+    - renamereg:^forge-:server.jar
+  289267: #rad
+    - cdreg:^RAD-Serverpack
+    - deletereg:^LaunchServer
+    - delete:README-howto.txt
+    - delete:eula.txt
+    - renamereg:^forge-:server.jar
+  655739: #atm7sky
+    - cdreg:^server
+    - delete:user_jvm_args.txt
+    - delete:startserver.bat
+    - forgegrep:startserver.sh
+    - delete:run.bat
+    - delete:startserver.sh
