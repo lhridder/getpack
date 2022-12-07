@@ -89,3 +89,6 @@ See practical examples in packs.yml
 
 #### shforgegrep
 `shforgegrep:filename` read specified file, search for forge >=1.17 startup format and create generic run.sh.
+
+#### forge
+`forge:version` install latest forge version for specified **mcversion** in current folder.

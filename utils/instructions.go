@@ -2,7 +2,8 @@ package utils
 
 import (
 	"fmt"
-	"io"
+	"getpack/sources/forge"
+	"getpack/util"
 	"io/ioutil"
 	"log"
 	"os"
@@ -187,6 +188,12 @@ func Instructions(instructions []string) error {
 						}
 					}
 				}
+			}
+		case "forge":
+			mcversion := parts[1]
+			err := forge.Install(mcversion)
+			if err != nil {
+				return fmt.Errorf("failed to install forge: %s", err)
 			}
 		}
 	}
