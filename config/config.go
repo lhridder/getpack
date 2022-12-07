@@ -11,6 +11,7 @@ type Config struct {
 	Enabled struct {
 		Curse   bool `yaml:"curse"`
 		Technic bool `yaml:"technic"`
+		FTB     bool `yaml:"ftb"`
 		Paper   bool `yaml:"paper"`
 		Purpur  bool `yaml:"purpur"`
 		Spigot  bool `yaml:"spigot"`
@@ -24,6 +25,9 @@ type Config struct {
 	}
 	Technic struct {
 		Modpacks []string `yaml:"modpacks"`
+	}
+	FTB struct {
+		Modpacks []int `yaml:"modpacks"`
 	}
 	Paper struct {
 		Version string `yaml:"version"`

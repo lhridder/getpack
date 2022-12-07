@@ -7,6 +7,7 @@ import (
 	"getpack/sources/curseforge"
 	"getpack/sources/fabric"
 	"getpack/sources/forge"
+	"getpack/sources/ftb"
 	"getpack/sources/paper"
 	"getpack/sources/purpur"
 	"getpack/sources/spigot"
@@ -263,6 +264,62 @@ func getPacks() error {
 		err = os.RemoveAll("technicinstaller")
 		if err != nil {
 			return fmt.Errorf("failed to delete technicinstaller folder: %s", err)
+		}
+	}
+
+	if config.Global.Enabled.FTB {
+		err := os.Mkdir("ftbinstaller", os.ModePerm)
+		if err != nil {
+			return fmt.Errorf("failed to create folder: %s", err)
+		}
+
+		err = os.Chdir("ftbinstaller")
+		if err != nil {
+			return fmt.Errorf("failed to go to folder: %s", err)
+		}
+
+		folder := config.Global.Target + "ftb/"
+		_, err = os.Stat(folder)
+		if os.IsNotExist(err) {
+			err = os.Mkdir(folder, os.ModePerm)
+			if err != nil {
+				return fmt.Errorf("failed to create target folder: %s", err)
+			}
+		}
+
+		for _, pack := range cfg.FTB.Modpacks {
+			log.Printf("Starting install of ftb modpack %d", pack)
+			ftbpack, err := ftb.Get(pack)
+			if err != nil {
+				log.Printf("Failed to get %s: %s", pack, err)
+				continue
+			}
+
+			log.Printf("Found pack %s with version %s", ftbpack.Name, ftbpack.Version.Name)
+			err = ftb.Install(ftbpack)
+			if err != nil {
+				log.Printf("Failed to install %s: %s", pack, err)
+			}
+
+			err = os.Chdir("..")
+			if err != nil {
+				return fmt.Errorf("failed to change directories back: %s", err)
+			}
+
+			err = os.RemoveAll(ftbpack.Name)
+			if err != nil {
+				return fmt.Errorf("failed to delete %s folder: %s", ftbpack.Name, err)
+			}
+		}
+
+		err = os.Chdir(dir)
+		if err != nil {
+			return fmt.Errorf("failed to change directories to home: %s", err)
+		}
+
+		err = os.RemoveAll("ftbinstaller")
+		if err != nil {
+			return fmt.Errorf("failed to delete ftbinstaller folder: %s", err)
 		}
 	}
 
