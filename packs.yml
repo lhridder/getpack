@@ -33,6 +33,28 @@ packs:
     - forgegrep:startserver.sh
     - delete:run.bat
     - delete:startserver.sh
+  381671: #atm6
+    - delete:startserver.bat
+    - forgegrep:startserver.sh
+    - renamereg:^forge-:server.jar
+    - delete:startserver.sh
+  426926: #atm7
+    - delete:user_jvm_args.txt
+    - delete:startserver.bat
+    - forgegrep:startserver.sh
+    - delete:run.bat
+    - delete:startserver.sh
+  520914: #atm8
+    - cdreg:^Server
+    - delete:user_jvm_args.txt
+    - deletereg:^INSTRUCTIONS
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - delete:installer.log
+    - delete:run.bat
+  285109: #rlcraft
+    - deletereg:.txt$
+    - forge:1.12.2
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
