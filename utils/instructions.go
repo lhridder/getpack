@@ -5,41 +5,11 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"os/exec"
 	"regexp"
 	"strings"
 )
-
-func Download(url string, filename string) error {
-	res, err := http.Get(url)
-	if err != nil {
-		return fmt.Errorf("failed to get jar: %s", err)
-	}
-
-	file, err := os.Create(filename)
-	if err != nil {
-		return fmt.Errorf("failed to create jar: %s", err)
-	}
-
-	_, err = io.Copy(file, res.Body)
-	if err != nil {
-		return fmt.Errorf("failed to write jar: %s", err)
-	}
-
-	err = res.Body.Close()
-	if err != nil {
-		return fmt.Errorf("failed to close body: %s", err)
-	}
-
-	err = file.Close()
-	if err != nil {
-		return fmt.Errorf("failed to close jar: %s", err)
-	}
-
-	return nil
-}
 
 func Instructions(instructions []string) error {
 	for _, instruction := range instructions {
@@ -154,7 +124,7 @@ func Instructions(instructions []string) error {
 			}
 
 			url := strings.ReplaceAll(forgeurl, "$FORGE_VERSION", forgeversion)
-			err = Download(url, "forge-installer.jar")
+			err = util.Download(url, "forge-installer.jar")
 			if err != nil {
 				return fmt.Errorf("failed to download forge installer: %s", err)
 			}

@@ -3,6 +3,7 @@ package ftb
 import (
 	"fmt"
 	"getpack/config"
+	"getpack/util"
 	"getpack/utils"
 	"log"
 	"os"
@@ -26,7 +27,7 @@ func Install(pack *FTBpack) error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = utils.Download(pack.ServerPackURL, "serverinstall")
+	err = util.Download(pack.ServerPackURL, "serverinstall")
 	if err != nil {
 		return fmt.Errorf("failed to download: %s", err)
 	}

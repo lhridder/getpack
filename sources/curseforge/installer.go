@@ -3,6 +3,7 @@ package curseforge
 import (
 	"fmt"
 	"getpack/config"
+	"getpack/util"
 	"getpack/utils"
 	"log"
 	"os"
@@ -25,7 +26,7 @@ func Install(pack *Cursepack) error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = utils.Download(pack.URL, "serverpack.zip")
+	err = util.Download(pack.URL, "serverpack.zip")
 	if err != nil {
 		return fmt.Errorf("failed to download: %s", err)
 	}

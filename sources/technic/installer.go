@@ -3,6 +3,7 @@ package technic
 import (
 	"fmt"
 	"getpack/config"
+	"getpack/util"
 	"getpack/utils"
 	"log"
 	"os"
@@ -25,7 +26,7 @@ func Install(pack *TechnicPack) error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = utils.Download(pack.ServerPackURL, "serverpack.zip")
+	err = util.Download(pack.ServerPackURL, "serverpack.zip")
 	if err != nil {
 		return fmt.Errorf("failed to download: %s", err)
 	}

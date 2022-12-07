@@ -3,7 +3,7 @@ package forge
 import (
 	"fmt"
 	"getpack/config"
-	"getpack/utils"
+	"getpack/util"
 	"log"
 	"os"
 	"os/exec"
@@ -60,7 +60,7 @@ func Install(mcversion string) error {
 		return fmt.Errorf("failed to get url: %s", err)
 	}
 
-	err = utils.Download(url, "forge-installer.jar")
+	err = util.Download(url, "forge-installer.jar")
 	if err != nil {
 		return fmt.Errorf("failed to download installer: %s", err)
 	}
