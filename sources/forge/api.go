@@ -3,7 +3,6 @@ package forge
 import (
 	"encoding/json"
 	"fmt"
-	"getpack/config"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -18,7 +17,7 @@ const (
 	base        = "https://maven.minecraftforge.net/net/minecraftforge/forge/"
 )
 
-func getURL() (string, string, error) {
+func GetURL(mcversion string) (string, string, error) {
 	res, err := http.Get(versionlist)
 	if err != nil {
 		return "", "", fmt.Errorf("failed to get json: %s", err)
@@ -38,8 +37,6 @@ func getURL() (string, string, error) {
 	if err != nil {
 		return "", "", fmt.Errorf("failed to unmarshal body: %s", err)
 	}
-
-	mcversion := config.Global.Forge.Version
 
 	forgeversion := promos.Promos[fmt.Sprintf("%s-recommended", mcversion)]
 

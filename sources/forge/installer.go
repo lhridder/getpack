@@ -12,12 +12,9 @@ import (
 )
 
 func Get() error {
-	url, version, err := getURL()
-	if err != nil {
-		return fmt.Errorf("failed to get url: %s", err)
-	}
+	mcversion := config.Global.Forge.Version
 
-	err = os.Mkdir("forgeinstaller", os.ModePerm)
+	err := os.Mkdir("forgeinstaller", os.ModePerm)
 	if err != nil {
 		return fmt.Errorf("failed to create folder: %s", err)
 	}
@@ -27,44 +24,9 @@ func Get() error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = util.Download(url, "forge-installer.jar")
+	err = Install(mcversion)
 	if err != nil {
-		return fmt.Errorf("failed to download installer: %s", err)
-	}
-
-	output, err := exec.Command("java", "-jar", "forge-installer.jar", "--installServer").Output()
-	if err != nil {
-		log.Println(string(output))
-		return fmt.Errorf("failed to run installer: %s", err)
-	}
-
-	err = os.Remove("forge-installer.jar")
-	if err != nil {
-		return fmt.Errorf("failed to remove installer: %s", err)
-	}
-
-	err = os.Remove("forge-installer.jar.log")
-	if err != nil {
-		return fmt.Errorf("failed to remove installer log: %s", err)
-	}
-
-	mcversion := config.Global.Forge.Version
-	major, err := strconv.ParseInt(strings.Split(mcversion, ".")[1], 10, 0)
-	if err != nil {
-		return fmt.Errorf("failed to parse major version: %s", err)
-	}
-
-	if major < 17 {
-		oldname := fmt.Sprintf("forge-%s.jar", version)
-		err = os.Rename(oldname, "server.jar")
-		if err != nil {
-			return fmt.Errorf("failed to rename server jar: %s", err)
-		}
-	} else {
-		err = os.Remove("run.bat")
-		if err != nil {
-			return fmt.Errorf("failed to remove bat file: %s", err)
-		}
+		return err
 	}
 
 	zipname := fmt.Sprintf("%s.zip", mcversion)
@@ -88,6 +50,54 @@ func Get() error {
 	}
 
 	log.Println("Finished installing forge")
+
+	return nil
+}
+
+func Install(mcversion string) error {
+	url, version, err := GetURL(mcversion)
+	if err != nil {
+		return fmt.Errorf("failed to get url: %s", err)
+	}
+
+	err = util.Download(url, "forge-installer.jar")
+	if err != nil {
+		return fmt.Errorf("failed to download installer: %s", err)
+	}
+
+	output, err := exec.Command("java", "-jar", "forge-installer.jar", "--installServer").Output()
+	if err != nil {
+		log.Println(string(output))
+		return fmt.Errorf("failed to run installer: %s", err)
+	}
+
+	err = os.Remove("forge-installer.jar")
+	if err != nil {
+		return fmt.Errorf("failed to remove installer: %s", err)
+	}
+
+	err = os.Remove("forge-installer.jar.log")
+	if err != nil {
+		return fmt.Errorf("failed to remove installer log: %s", err)
+	}
+
+	major, err := strconv.ParseInt(strings.Split(mcversion, ".")[1], 10, 0)
+	if err != nil {
+		return fmt.Errorf("failed to parse major version: %s", err)
+	}
+
+	if major < 17 {
+		oldname := fmt.Sprintf("forge-%s.jar", version)
+		err = os.Rename(oldname, "server.jar")
+		if err != nil {
+			return fmt.Errorf("failed to rename server jar: %s", err)
+		}
+	} else {
+		err = os.Remove("run.bat")
+		if err != nil {
+			return fmt.Errorf("failed to remove bat file: %s", err)
+		}
+	}
 
 	return nil
 }
