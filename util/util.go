@@ -95,6 +95,7 @@ func Instructions(instructions []string) error {
 					if err != nil {
 						return fmt.Errorf("failed to execute rename instruction %s: %s", instruction, err)
 					}
+					continue
 				}
 			}
 		case "cdreg":
