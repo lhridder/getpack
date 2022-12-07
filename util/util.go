@@ -46,9 +46,17 @@ func Instructions(instructions []string) error {
 		parts := strings.Split(instruction, ":")
 		switch parts[0] {
 		case "delete":
-			err := os.Remove(parts[1])
-			if err != nil {
-				return fmt.Errorf("failed to execute remove instruction %s: %s", instruction, err)
+			target := parts[1]
+			if strings.HasSuffix(target, "/") {
+				err := os.RemoveAll(target)
+				if err != nil {
+					return fmt.Errorf("failed to execute remove folder instruction %s: %s", instruction, err)
+				}
+			} else {
+				err := os.Remove(target)
+				if err != nil {
+					return fmt.Errorf("failed to execute remove instruction %s: %s", instruction, err)
+				}
 			}
 		case "deletereg":
 			files, err := ioutil.ReadDir(".")
