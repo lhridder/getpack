@@ -113,6 +113,7 @@ func Instructions(instructions []string) error {
 					if err != nil {
 						return fmt.Errorf("failed to execute cd instruction %s: %s", instruction, err)
 					}
+					continue
 				}
 			}
 		case "javarun":
@@ -131,6 +132,7 @@ func Instructions(instructions []string) error {
 						log.Println(string(output))
 						return fmt.Errorf("failed to javarun for %s: %s", instruction, err)
 					}
+					continue
 				}
 			}
 		case "forgegrep":
