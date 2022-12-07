@@ -177,6 +177,44 @@ func Instructions(instructions []string) error {
 				log.Println(string(output))
 				return fmt.Errorf("failed to bashrun for %s: %s", instruction, err)
 			}
+		case "shforgegrep":
+			file, err := ioutil.ReadFile(parts[1])
+			if err != nil {
+				return fmt.Errorf("cant read file: %s", err)
+			}
+
+			if parts[1] == "run.sh" {
+				err = os.Remove("run.sh")
+				if err != nil {
+					return fmt.Errorf("failed to remove duplicate run.sh: %s", err)
+				}
+			}
+
+			lines := strings.Split(string(file), "\n")
+			for _, line := range lines {
+				if strings.Contains(line, "@libraries") {
+					parts := strings.Split(line, " ")
+					for _, part := range parts {
+						if strings.HasPrefix(part, "@libraries/net") {
+							startfile, err := os.Create("run.sh")
+							if err != nil {
+								return fmt.Errorf("cant create file: %s", err)
+							}
+
+							_, err = startfile.WriteString(fmt.Sprintf("#!/usr/bin/env sh\njava @user_jvm_args.txt %s \"$@\"", part))
+							if err != nil {
+								return fmt.Errorf("cant write to file: %s", err)
+							}
+
+							err = startfile.Close()
+							if err != nil {
+								return fmt.Errorf("cant close file: %s", err)
+							}
+							continue
+						}
+					}
+				}
+			}
 		}
 	}
 	return nil
