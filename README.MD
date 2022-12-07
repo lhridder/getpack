@@ -2,7 +2,7 @@
 **Tool for fetching server jars and modpacks**
 
 ### TODO
-- FTB support
+- Docker building and testing
 - Webhook/Discord error handling
 - Store currently installed version of pack
 - GUI?
@@ -16,3 +16,4 @@
 - fabric installing
 - curseforge installing
 - technicpack installing
+- ftb installing

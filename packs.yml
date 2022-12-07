@@ -33,3 +33,16 @@ packs:
     - forgegrep:startserver.sh
     - delete:run.bat
     - delete:startserver.sh
+  #ftb
+  100: #stoneblock3
+    - delete:log4jfix/
+    - shforgegrep:start.sh
+    - delete:start.sh
+    - delete:version.json
+    - delete:installer.log
+  35: #revelation
+    - delete:log4jfix/
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
+    - delete:version.json
+    - delete:installer.log
