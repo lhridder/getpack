@@ -3,7 +3,7 @@ package fabric
 import (
 	"fmt"
 	"getpack/config"
-	"getpack/util"
+	"getpack/utils"
 	"log"
 	"os"
 	"os/exec"
@@ -20,7 +20,7 @@ func Install(url string) error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = util.Download(url, "installer.jar")
+	err = utils.Download(url, "installer.jar")
 	if err != nil {
 		return fmt.Errorf("failed to download installer: %s", err)
 	}

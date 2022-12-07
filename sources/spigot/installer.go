@@ -3,7 +3,7 @@ package spigot
 import (
 	"fmt"
 	"getpack/config"
-	"getpack/util"
+	"getpack/utils"
 	"log"
 	"os"
 	"os/exec"
@@ -22,7 +22,7 @@ func Get() error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = util.Download(buildtools, "buildtools.jar")
+	err = utils.Download(buildtools, "buildtools.jar")
 	if err != nil {
 		return fmt.Errorf("failed to download buildtools: %s", err)
 	}

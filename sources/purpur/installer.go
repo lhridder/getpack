@@ -3,7 +3,7 @@ package purpur
 import (
 	"fmt"
 	"getpack/config"
-	"getpack/util"
+	"getpack/utils"
 	"log"
 	"os"
 )
@@ -27,7 +27,7 @@ func Get() error {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
 
-	err = util.Download(url, filename)
+	err = utils.Download(url, filename)
 	if err != nil {
 		return fmt.Errorf("failed to download jar: %s", err)
 	}

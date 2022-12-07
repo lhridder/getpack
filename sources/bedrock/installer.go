@@ -3,7 +3,7 @@ package bedrock
 import (
 	"fmt"
 	"getpack/config"
-	"getpack/util"
+	"getpack/utils"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -69,7 +69,7 @@ func Get() error {
 
 	filename := "bedrock-server.zip"
 
-	err = util.Download(link, filename)
+	err = utils.Download(link, filename)
 	if err != nil {
 		return fmt.Errorf("failed to download bedrock zip: %s", err)
 	}
