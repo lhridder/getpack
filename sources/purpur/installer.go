@@ -6,9 +6,12 @@ import (
 	"getpack/util"
 	"log"
 	"os"
+	"time"
 )
 
 func Get() error {
+	start := time.Now()
+
 	version := config.Global.Purpur.Version
 	filename := fmt.Sprintf("%s.jar", version)
 
@@ -46,7 +49,7 @@ func Get() error {
 		return fmt.Errorf("failed to move jar to target folder: %s", err)
 	}
 
-	log.Println("Finished installing purpur")
+	log.Printf("Finished installing purpur in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }

@@ -9,9 +9,12 @@ import (
 	"os"
 	"os/exec"
 	"strconv"
+	"time"
 )
 
 func Install(pack *FTBpack) error {
+	start := time.Now()
+
 	instructions := config.Global.Packs[pack.Id]
 	if len(instructions) == 0 {
 		return fmt.Errorf("instructions for pack are too short/not available")
@@ -73,7 +76,7 @@ func Install(pack *FTBpack) error {
 		return fmt.Errorf("failed to move zip to target folder: %s", err)
 	}
 
-	log.Printf("Finished installing %s version %s", pack.Name, pack.Version.Name)
+	log.Printf("Finished installing %s version %s in %.2fs", pack.Name, pack.Version.Name, time.Now().Sub(start).Seconds())
 
 	return nil
 }

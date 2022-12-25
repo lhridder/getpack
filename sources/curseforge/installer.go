@@ -8,9 +8,12 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"time"
 )
 
 func Install(pack *Cursepack) error {
+	start := time.Now()
+
 	instructions := config.Global.Packs[pack.Data.ID]
 	if len(instructions) == 0 {
 		return fmt.Errorf("instructions for pack are too short/not available")
@@ -67,7 +70,7 @@ func Install(pack *Cursepack) error {
 		return fmt.Errorf("failed to move zip to target folder: %s", err)
 	}
 
-	log.Printf("Finished installing %s version %s", pack.Data.Name, pack.Version)
+	log.Printf("Finished installing %s version %s in %.2fs", pack.Data.Name, pack.Version, time.Now().Sub(start).Seconds())
 
 	return nil
 }

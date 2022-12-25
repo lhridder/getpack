@@ -7,11 +7,14 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"time"
 )
 
 const buildtools = "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
 
 func Get() error {
+	start := time.Now()
+
 	err := os.Mkdir("spigotinstaller", os.ModePerm)
 	if err != nil {
 		return fmt.Errorf("failed to create folder: %s", err)
@@ -50,7 +53,7 @@ func Get() error {
 		return fmt.Errorf("failed to move jar to target folder: %s", err)
 	}
 
-	log.Println("Finished installing spigot")
+	log.Printf("Finished installing spigot in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }

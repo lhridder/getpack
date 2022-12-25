@@ -6,9 +6,12 @@ import (
 	"getpack/util"
 	"log"
 	"os"
+	"time"
 )
 
 func Get() error {
+	start := time.Now()
+
 	url, err := getURL()
 	if err != nil {
 		return fmt.Errorf("failed to get url: %s", err)
@@ -45,7 +48,7 @@ func Get() error {
 		return fmt.Errorf("failed to move jar to target folder: %s", err)
 	}
 
-	log.Println("Finished installing paper")
+	log.Printf("Finished installing paper in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }

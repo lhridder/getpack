@@ -11,9 +11,12 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
+	"time"
 )
 
 func Get() error {
+	start := time.Now()
+
 	req, err := http.NewRequest("GET", "https://www.minecraft.net/en-us/download/server/bedrock", nil)
 	if err != nil {
 		return fmt.Errorf("failed to format request: %s", err)
@@ -98,7 +101,7 @@ func Get() error {
 		return fmt.Errorf("failed to move executable to target folder: %s", err)
 	}
 
-	log.Println("Finished installing bedrock")
+	log.Printf("Finished installing bedrock in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }

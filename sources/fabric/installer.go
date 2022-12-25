@@ -7,9 +7,12 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"time"
 )
 
 func Install(url string) error {
+	start := time.Now()
+
 	err := os.Mkdir("fabricinstaller", os.ModePerm)
 	if err != nil {
 		return fmt.Errorf("failed to create folder: %s", err)
@@ -95,7 +98,7 @@ func Install(url string) error {
 		log.Printf("Finished installing fabric %s", mcversion)
 	}
 
-	log.Println("Finished installing fabric versions")
+	log.Printf("Finished installing fabric versions in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }
