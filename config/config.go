@@ -6,6 +6,7 @@ import (
 )
 
 type Config struct {
+	Debug   bool
 	Target  string           `yaml:"target"`
 	Packs   map[int][]string `yaml:"packs"`
 	Enabled struct {

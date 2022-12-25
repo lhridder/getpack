@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"getpack/config"
 	"getpack/sources/forge"
 	"getpack/util"
 	"io/ioutil"
@@ -10,11 +11,13 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
+	"time"
 )
 
 func Instructions(instructions []string) error {
 	for _, instruction := range instructions {
 		parts := strings.Split(instruction, ":")
+		start := time.Now()
 		switch parts[0] {
 		case "delete":
 			target := parts[1]
@@ -213,6 +216,9 @@ func Instructions(instructions []string) error {
 			if err != nil {
 				return fmt.Errorf("failed to install forge: %s", err)
 			}
+		}
+		if config.Global.Debug {
+			log.Printf("Instruction '%s' took %.2fs", instruction, time.Now().Sub(start).Seconds())
 		}
 	}
 	return nil

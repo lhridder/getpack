@@ -14,6 +14,7 @@ import (
 	"getpack/sources/technic"
 	"log"
 	"os"
+	"strconv"
 )
 
 var (
@@ -29,6 +30,8 @@ func main() {
 	}
 	cfg = config.Global
 	dir, _ = os.Getwd()
+
+	log.Printf("Starting getpack with debug: %s", strconv.FormatBool(cfg.Debug))
 
 	err = getVersions()
 	if err != nil {
