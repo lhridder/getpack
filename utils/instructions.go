@@ -114,17 +114,35 @@ func Instructions(instructions []string) error {
 
 			forgeversion := ""
 			forgeurl := ""
+			mcversion := ""
 
 			for _, line := range strings.Split(string(file), "\n") {
+				line = strings.TrimSpace(line)
 				if strings.HasPrefix(line, "FORGE_VERSION") {
 					forgeversion = strings.Split(line, "=")[1]
+				}
+				if strings.HasPrefix(line, "MODLOADER_VERSION") {
+					forgeversion = strings.Split(line, "\"")[1]
 				}
 				if strings.HasPrefix(line, "FORGE_URL") {
 					forgeurl = strings.Split(line, "\"")[1]
 				}
+				if strings.HasPrefix(line, "FORGE_INSTALLER_URL") {
+					forgeurl = strings.Split(line, "\"")[1]
+				}
+				if strings.HasPrefix(line, "MINECRAFT_VERSION") {
+					mcversion = strings.Split(line, "\"")[1]
+				}
 			}
 
-			url := strings.ReplaceAll(forgeurl, "$FORGE_VERSION", forgeversion)
+			url := forgeurl
+			if strings.Contains(forgeurl, "${MODLOADER_VERSION}") {
+				url = strings.ReplaceAll(url, "${MODLOADER_VERSION}", forgeversion)
+				url = strings.ReplaceAll(url, "${MINECRAFT_VERSION}", mcversion)
+			} else {
+				url = strings.ReplaceAll(url, "$FORGE_VERSION", forgeversion)
+			}
+
 			err = util.Download(url, "forge-installer.jar")
 			if err != nil {
 				return fmt.Errorf("failed to download forge installer: %s", err)
