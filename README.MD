@@ -19,7 +19,7 @@
 - ftb installing
 
 ## Config
-Config layout:
+config.yml layout:
 ```yaml
 target: /path/to/folder
 enabled:
@@ -53,10 +53,14 @@ forge:
   version: insert minecraft version here
 spigot:
   version: insert minecraft version here
+```
 
+packs.yml layout:
+```yaml
 packs:
   insert pack id here:
-    - insert pack instructions here
+    - insert pack instruction here
+    - insert another pack instruction here
 ```
 
 ### Instructions
