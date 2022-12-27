@@ -30,11 +30,20 @@ func Get() error {
 		return fmt.Errorf("failed to download buildtools: %s", err)
 	}
 
+	if config.Global.Debug {
+		log.Printf("Downloading buildtools took %.2fs", time.Now().Sub(start).Seconds())
+	}
+
 	version := config.Global.Spigot.Version
+	startbuildtools := time.Now()
 	output, err := exec.Command("java", "-jar", "buildtools.jar", "--rev", version).Output()
 	if err != nil {
 		log.Println(string(output))
 		return fmt.Errorf("failed to run buildtools: %s", err)
+	}
+
+	if config.Global.Debug {
+		log.Printf("Running buildtools took %.2fs", time.Now().Sub(startbuildtools).Seconds())
 	}
 
 	filename := fmt.Sprintf("spigot-%s.jar", version)

@@ -28,7 +28,13 @@ func Install(url string) error {
 		return fmt.Errorf("failed to download installer: %s", err)
 	}
 
+	if config.Global.Debug {
+		log.Printf("Downloading fabric installer took %.2fs", time.Now().Sub(start).Seconds())
+	}
+
 	for _, mcversion := range config.Global.Fabric.Versions {
+		startversion := time.Now()
+
 		err := os.Mkdir(mcversion, os.ModePerm)
 		if err != nil {
 			return fmt.Errorf("failed to create mcversion folder: %s", err)
@@ -43,6 +49,10 @@ func Install(url string) error {
 		if err != nil {
 			log.Println(string(output))
 			return fmt.Errorf("failed to run installer for %s: %s", mcversion, err)
+		}
+
+		if config.Global.Debug {
+			log.Printf("Running fabric %s installer took %.2fs", mcversion, time.Now().Sub(startversion).Seconds())
 		}
 
 		err = os.Rename("server.jar", "vanilla.jar")

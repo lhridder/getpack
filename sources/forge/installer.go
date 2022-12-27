@@ -13,6 +13,8 @@ import (
 )
 
 func Get() error {
+	start := time.Now()
+
 	mcversion := config.Global.Forge.Version
 
 	err := os.Mkdir("forgeinstaller", os.ModePerm)
@@ -50,7 +52,7 @@ func Get() error {
 		return fmt.Errorf("failed to move zip to target folder: %s", err)
 	}
 
-	log.Println("Finished installing forge")
+	log.Printf("Finished installing forge version in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }
@@ -68,10 +70,19 @@ func Install(mcversion string) error {
 		return fmt.Errorf("failed to download installer: %s", err)
 	}
 
+	if config.Global.Debug {
+		log.Printf("Downloading forge installer took %.2fs", time.Now().Sub(start).Seconds())
+	}
+
+	install := time.Now()
 	output, err := exec.Command("java", "-jar", "forge-installer.jar", "--installServer").Output()
 	if err != nil {
 		log.Println(string(output))
 		return fmt.Errorf("failed to run installer: %s", err)
+	}
+
+	if config.Global.Debug {
+		log.Printf("Running forge installer took %.2fs", time.Now().Sub(install).Seconds())
 	}
 
 	err = os.Remove("forge-installer.jar")
@@ -101,8 +112,6 @@ func Install(mcversion string) error {
 			return fmt.Errorf("failed to remove bat file: %s", err)
 		}
 	}
-
-	log.Printf("Finished installing forge version in %.2fs", time.Now().Sub(start).Seconds())
 
 	return nil
 }
