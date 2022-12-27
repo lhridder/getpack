@@ -1,14 +1,15 @@
 package config
 
 import (
+	"fmt"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 )
 
 type Config struct {
 	Debug   bool
-	Target  string           `yaml:"target"`
-	Packs   map[int][]string `yaml:"packs"`
+	Target  string `yaml:"target"`
+	Packs   map[int][]string
 	Enabled struct {
 		Curse   bool `yaml:"curse"`
 		Technic bool `yaml:"technic"`
@@ -47,12 +48,34 @@ type Config struct {
 	}
 }
 
+type Packs struct {
+	Packs map[int][]string `yaml:"packs"`
+}
+
 var Global Config
 
 func Load() error {
-	file, err := ioutil.ReadFile("config.yml")
+	configfile, err := ioutil.ReadFile("config.yml")
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to read config.yml: %s", err)
 	}
-	return yaml.Unmarshal(file, &Global)
+
+	err = yaml.Unmarshal(configfile, &Global)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal config.yml: %s", err)
+	}
+
+	packsfile, err := ioutil.ReadFile("packs.yml")
+	if err != nil {
+		return fmt.Errorf("failed to read packs.yml: %s", err)
+	}
+
+	var packs Packs
+	err = yaml.Unmarshal(packsfile, &packs)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal packs.yml: %s", err)
+	}
+
+	Global.Packs = packs.Packs
+	return nil
 }
