@@ -73,6 +73,12 @@ packs:
     - delete:start.sh
     - delete:version.json
     - delete:installer.log
+  101: #direwolf201.19
+    - delete:log4jfix/
+    - shforgegrep:start.sh
+    - delete:start.sh
+    - delete:version.json
+    - delete:installer.log
   35: #revelation
     - delete:log4jfix/
     - renamereg:^forge-:server.jar
