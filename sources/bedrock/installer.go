@@ -77,8 +77,9 @@ func Get() error {
 		return fmt.Errorf("failed to download bedrock zip: %s", err)
 	}
 
-	err = exec.Command("unzip", filename).Run()
+	output, err := exec.Command("unzip", filename).Output()
 	if err != nil {
+		log.Println(string(output))
 		return fmt.Errorf("failed to unzip bedrock server: %s", err)
 	}
 

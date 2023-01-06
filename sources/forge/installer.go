@@ -33,8 +33,9 @@ func Get() error {
 	}
 
 	zipname := fmt.Sprintf("%s.zip", mcversion)
-	err = exec.Command("zip", "-qr", zipname, "./").Run()
+	output, err := exec.Command("zip", "-qr", zipname, "./").Output()
 	if err != nil {
+		log.Println(string(output))
 		return fmt.Errorf("failed to zip installer for %s: %s", mcversion, err)
 	}
 

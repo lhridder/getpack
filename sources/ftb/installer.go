@@ -57,8 +57,9 @@ func Install(pack *FTBpack) error {
 	}
 
 	zipname := fmt.Sprintf("%s.zip", pack.Version.Name)
-	err = exec.Command("zip", "-qr", zipname, "./").Run()
+	output, err = exec.Command("zip", "-qr", zipname, "./").Output()
 	if err != nil {
+		log.Println(string(output))
 		return fmt.Errorf("failed to zip pack: %s", err)
 	}
 

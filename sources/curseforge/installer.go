@@ -51,8 +51,9 @@ func Install(pack *Cursepack) error {
 	}
 
 	zipname := fmt.Sprintf("%s.zip", pack.Version)
-	err = exec.Command("zip", "-qr", zipname, "./").Run()
+	output, err = exec.Command("zip", "-qr", zipname, "./").Output()
 	if err != nil {
+		log.Println(string(output))
 		return fmt.Errorf("failed to zip pack: %s", err)
 	}
 
