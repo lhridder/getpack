@@ -72,6 +72,13 @@ packs:
     - forgegrep:start.sh
     - renamereg:^forge-:server.jar
     - delete:start.sh
+  389615: #pixelmon
+    - deletereg:.bat$
+    - deletereg:.sh$
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - delete:installer.log
+    - renamereg:^forge-:server.jar
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
