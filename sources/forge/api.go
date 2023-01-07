@@ -38,7 +38,7 @@ func GetURL(mcversion string) (string, string, error) {
 		return "", "", fmt.Errorf("failed to unmarshal body: %s", err)
 	}
 
-	forgeversion := promos.Promos[fmt.Sprintf("%s-recommended", mcversion)]
+	forgeversion := promos.Promos[fmt.Sprintf("%s-latest", mcversion)]
 
 	version := fmt.Sprintf("%s-%s", mcversion, forgeversion)
 
