@@ -79,6 +79,8 @@ packs:
     - deletereg:installer.jar$
     - delete:installer.log
     - renamereg:^forge-:server.jar
+  711537: #vaulthunters3
+    - forge:1.18.2
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
