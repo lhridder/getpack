@@ -79,6 +79,11 @@ packs:
     - deletereg:installer.jar$
     - delete:installer.log
     - renamereg:^forge-:server.jar
+  458201: #vaulthunters2
+    - delete:start.ps1
+    - forgegrep:start.sh
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
   711537: #vaulthunters3
     - forge:1.18.2
   #ftb
