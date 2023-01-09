@@ -91,9 +91,17 @@ func Install(mcversion string) error {
 		return fmt.Errorf("failed to remove installer: %s", err)
 	}
 
-	err = os.Remove("forge-installer.jar.log")
-	if err != nil {
-		return fmt.Errorf("failed to remove installer log: %s", err)
+	_, err = os.Stat("forge-installer.jar.log")
+	if os.IsNotExist(err) {
+		err = os.Remove("installer.log")
+		if err != nil {
+			return fmt.Errorf("failed to remove installer log: %s", err)
+		}
+	} else {
+		err = os.Remove("forge-installer.jar.log")
+		if err != nil {
+			return fmt.Errorf("failed to remove installer log: %s", err)
+		}
 	}
 
 	major, err := strconv.ParseInt(strings.Split(mcversion, ".")[1], 10, 0)
