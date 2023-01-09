@@ -86,6 +86,13 @@ packs:
     - delete:start.sh
   711537: #vaulthunters3
     - forge:1.18.2
+  466901: #bettermcplus
+    - cdreg:^Better
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - forgegrep:start.sh
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
