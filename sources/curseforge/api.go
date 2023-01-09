@@ -42,6 +42,10 @@ type Cursepack struct {
 	Version string
 }
 
+type cursefiles struct {
+	Data []file `json:"data"`
+}
+
 const base = "https://api.curseforge.com/v1/"
 
 func Get(packid int) (*Cursepack, error) {
@@ -72,15 +76,48 @@ func Get(packid int) (*Cursepack, error) {
 		return nil, fmt.Errorf("failed to unmarshal json: %s", err)
 	}
 
-	file := pack.Data.LatestFiles[len(pack.Data.LatestFiles)-1]
+	latestfile := pack.Data.LatestFiles[len(pack.Data.LatestFiles)-1]
+	if latestfile.ServerPackFileID == 0 {
+		request2, err := http.NewRequest("GET", fmt.Sprintf("%smods/%s/files", base, strconv.Itoa(packid)), nil)
+		if err != nil {
+			return nil, fmt.Errorf("failed to format request: %s", err)
+		}
+		request2.Header.Set("x-api-key", config.Global.Curse.APIkey)
 
-	url, err := getServerPackURL(packid, file.ServerPackFileID)
+		res2, err := client.Do(request2)
+		if err != nil {
+			return nil, fmt.Errorf("failed to request pack files json: %s", err)
+		}
+
+		if res2.StatusCode != 200 {
+			return nil, fmt.Errorf("received non 200 status code: %s", res2.Status)
+		}
+
+		body2, err := ioutil.ReadAll(res2.Body)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read response body: %s", err)
+		}
+
+		var files cursefiles
+		err = json.Unmarshal(body2, &files)
+		if err != nil {
+			return nil, fmt.Errorf("failed to unmarshal json: %s", err)
+		}
+
+		for _, latestfile = range files.Data {
+			if latestfile.ServerPackFileID != 0 {
+				break
+			}
+		}
+	}
+
+	url, err := getServerPackURL(packid, latestfile.ServerPackFileID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get server pack url: %s", err)
 	}
 
 	pack.URL = url
-	pack.Version = file.DisplayName
+	pack.Version = latestfile.DisplayName
 
 	return pack, nil
 }
