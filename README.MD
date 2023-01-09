@@ -88,6 +88,9 @@ See practical examples in packs.yml
 #### forgegrep
 `forgegrep:filename` read specified file, search for forge version and install it.
 
+#### fabricgrep
+`fabricgrep:filename` read specified file, search for fabric version and install it.
+
 #### bashrun
 `bashrun:arg` execute specified bash command.
 

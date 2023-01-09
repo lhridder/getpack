@@ -166,6 +166,71 @@ func Instructions(instructions []string) error {
 			if err != nil {
 				return fmt.Errorf("failed to remove installer log: %s", err)
 			}
+		case "fabricgrep":
+			file, err := ioutil.ReadFile(parts[1])
+			if err != nil {
+				return fmt.Errorf("cant read file: %s", err)
+			}
+
+			fabricinstallerversion := ""
+			fabricurl := ""
+			mcversion := ""
+
+			for _, line := range strings.Split(string(file), "\n") {
+				line = strings.TrimSpace(line)
+				if strings.HasPrefix(line, "FABRIC_INSTALLER_VERSION") {
+					fabricinstallerversion = strings.Split(line, "\"")[1]
+				}
+				if strings.HasPrefix(line, "FABRIC_INSTALLER_URL") {
+					fabricurl = strings.Split(line, "\"")[1]
+				}
+				if strings.HasPrefix(line, "MINECRAFT_VERSION") {
+					mcversion = strings.Split(line, "\"")[1]
+				}
+			}
+
+			url := strings.ReplaceAll(fabricurl, "${FABRIC_INSTALLER_VERSION}", fabricinstallerversion)
+
+			err = util.Download(url, "installer.jar")
+			if err != nil {
+				return fmt.Errorf("failed to download forge installer: %s", err)
+			}
+
+			output, err := exec.Command("java", "-jar", "installer.jar", "server", "-mcversion", mcversion, "-downloadMinecraft").Output()
+			if err != nil {
+				log.Println(string(output))
+				return fmt.Errorf("failed to run installer for %s: %s", mcversion, err)
+			}
+
+			err = os.Rename("server.jar", "vanilla.jar")
+			if err != nil {
+				return fmt.Errorf("failed to rename server jar: %s", err)
+			}
+
+			err = os.Rename("fabric-server-launch.jar", "server.jar")
+			if err != nil {
+				return fmt.Errorf("failed to rename server jar: %s", err)
+			}
+
+			fabricfile, err := os.Create("fabric-server-launcher.properties")
+			if err != nil {
+				return fmt.Errorf("failed to create fabricfile: %s", err)
+			}
+
+			_, err = fmt.Fprintln(fabricfile, "serverJar=vanilla.jar")
+			if err != nil {
+				return fmt.Errorf("failed to write text to fabricfile: %s", err)
+			}
+
+			err = fabricfile.Close()
+			if err != nil {
+				return fmt.Errorf("failed to close fabricfile: %s", err)
+			}
+
+			err = os.Remove("installer.jar")
+			if err != nil {
+				return fmt.Errorf("failed to remove installer log: %s", err)
+			}
 		case "bashrun":
 			output, err := exec.Command("bash", parts[1]).Output()
 			if err != nil {
