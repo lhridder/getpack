@@ -93,6 +93,12 @@ packs:
     - forgegrep:start.sh
     - renamereg:^forge-:server.jar
     - delete:start.sh
+  452013: #bettermcfabric
+    - cdreg:^Better
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - fabricgrep:start.sh
+    - delete:start.sh
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
