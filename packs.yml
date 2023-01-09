@@ -93,6 +93,13 @@ packs:
     - forgegrep:start.sh
     - renamereg:^forge-:server.jar
     - delete:start.sh
+  482878: #bettermcnew
+    - cdreg:^Better
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - forgegrep:start.sh
+    - delete:start.sh
+    - delete:run.bat
   466901: #bettermcplus
     - cdreg:^Better
     - delete:start.ps1
