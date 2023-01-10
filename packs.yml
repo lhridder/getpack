@@ -113,6 +113,12 @@ packs:
     - delete:READ_ME.txt
     - fabricgrep:start.sh
     - delete:start.sh
+  461725: #medievalmcfabric
+    - cdreg:^Medieval
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - fabricgrep:start.sh
+    - delete:start.sh
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
