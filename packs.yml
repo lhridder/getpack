@@ -113,6 +113,13 @@ packs:
     - delete:READ_ME.txt
     - fabricgrep:start.sh
     - delete:start.sh
+  456356: #medievalmc
+    - cdreg:^Medieval
+    - delete:start.ps1
+    - deletereg:ME.txt$
+    - forgegrep:start.sh
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
   486989: #medievalmcnew
     - cdreg:^Medieval
     - delete:start.ps1
