@@ -152,3 +152,9 @@ packs:
     - delete:start.sh
     - delete:version.json
     - delete:installer.log
+  91: #oceanblock
+    - delete:log4jfix/
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
+    - delete:version.json
+    - delete:installer.log
