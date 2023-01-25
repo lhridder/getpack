@@ -14,7 +14,7 @@ type forgepromotions struct {
 
 const (
 	versionlist = "https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json"
-	base        = "https://maven.minecraftforge.net/net/minecraftforge/forge/"
+	Base        = "https://maven.minecraftforge.net/net/minecraftforge/forge/"
 )
 
 func GetURL(mcversion string) (string, string, error) {
@@ -44,5 +44,5 @@ func GetURL(mcversion string) (string, string, error) {
 
 	log.Printf("Found forge version %s", version)
 
-	return fmt.Sprintf("%s%s/forge-%s-installer.jar", base, version, version), version, nil
+	return fmt.Sprintf("%s%s/forge-%s-installer.jar", Base, version, version), version, nil
 }
