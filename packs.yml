@@ -133,6 +133,14 @@ packs:
     - delete:READ_ME.txt
     - fabricgrep:start.sh
     - delete:start.sh
+  563655: #createflavored
+    - deletereg:^CHANGELOG
+    - delete:SERVER-START.bat
+    - delete:user_jvm_args.txt
+    - delete:README.txt
+    - forgegrep:SERVER-START.sh
+    - delete:SERVER-START.sh
+    - delete:run.bat
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
