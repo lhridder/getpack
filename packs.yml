@@ -147,6 +147,20 @@ packs:
     - forgegrep:startserver.sh
     - renamereg:^forge-:server.jar
     - delete:startserver.sh
+  296062: #skyfactory4
+    - delete:Install.bat
+    - delete:Install.sh
+    - delete:README.txt
+    - delete:ServerStart.bat
+    - delete:ServerStart.sh
+    - delete:settings.bat
+    - delete:settings.sh
+    - deletereg:^SkyFactory
+    - delete:UPDATE-GUIDE.txt
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - delete:installer.log
+    - renamereg:^forge-:server.jar
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
