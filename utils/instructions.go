@@ -117,23 +117,34 @@ func Instructions(instructions []string) error {
 
 			forgeversion := ""
 			mcversion := ""
+			url := ""
 
 			for _, line := range strings.Split(string(file), "\n") {
 				line = strings.TrimSpace(line)
-				if strings.HasPrefix(line, "FORGE_VERSION") {
+				if strings.HasPrefix(line, "FORGE_URL=") || strings.HasPrefix(line, "FORGE_INSTALLER_URL=") {
+					url = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "FORGE_VERSION=") {
 					forgeversion = strings.Split(line, "=")[1]
-					break
+					continue
 				}
-				if strings.HasPrefix(line, "MODLOADER_VERSION") || strings.HasPrefix(line, "FORGE") {
+				if strings.HasPrefix(line, "MODLOADER_VERSION=") || strings.HasPrefix(line, "FORGE=") {
 					forgeversion = strings.Split(line, "\"")[1]
+					continue
 				}
-				if strings.HasPrefix(line, "MINECRAFT_VERSION") || strings.HasPrefix(line, "MINECRAFT") {
+				if strings.HasPrefix(line, "MINECRAFT_VERSION=") || strings.HasPrefix(line, "MINECRAFT=") {
 					mcversion = strings.Split(line, "\"")[1]
 				}
 			}
 
-			version := fmt.Sprintf("%s-%s", mcversion, forgeversion)
-			url := fmt.Sprintf("%s%s/forge-%s-installer.jar", forge.Base, version, version)
+			if mcversion != "" {
+				version := fmt.Sprintf("%s-%s", mcversion, forgeversion)
+				url = fmt.Sprintf("%s%s/forge-%s-installer.jar", forge.Base, version, version)
+			} else {
+				url = strings.ReplaceAll(url, "$FORGE_VERSION", forgeversion)
+			}
+			log.Println(url)
 
 			err = util.Download(url, "forge-installer.jar")
 			if err != nil {
