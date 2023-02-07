@@ -144,7 +144,6 @@ func Instructions(instructions []string) error {
 			} else {
 				url = strings.ReplaceAll(url, "$FORGE_VERSION", forgeversion)
 			}
-			log.Println(url)
 
 			err = util.Download(url, "forge-installer.jar")
 			if err != nil {
