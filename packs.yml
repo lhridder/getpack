@@ -141,6 +141,12 @@ packs:
     - forgegrep:SERVER-START.sh
     - delete:SERVER-START.sh
     - delete:run.bat
+  510649: #ragnamod6
+    - delete:eula.txt
+    - delete:startserver.bat
+    - forgegrep:startserver.sh
+    - renamereg:^forge-:server.jar
+    - delete:startserver.sh
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
