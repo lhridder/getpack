@@ -171,6 +171,18 @@ packs:
     - forgegrep:start.sh
     - renamereg:^forge-:server.jar
     - delete:start.sh
+  290913: #stoneblock
+    - delete:1.12.2.json
+    - delete:Install.bat
+    - delete:Install.sh
+    - delete:Instructions.txt
+    - delete:LaunchServer.bat
+    - delete:LaunchServer.sh
+    - delete:settings.bat
+    - delete:settings.sh
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - renamereg:^forge-:server.jar
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
