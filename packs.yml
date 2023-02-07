@@ -188,6 +188,19 @@ packs:
     - deletereg:installer.jar$
     - delete:installer.log
     - renamereg:^forge-:server.jar
+  268208: #sevtechages
+    - delete:Install.bat
+    - delete:Install.sh
+    - delete:README.txt
+    - delete:ServerStart.bat
+    - delete:ServerStart.sh
+    - delete:settings.bat
+    - delete:settings.sh
+    - delete:UPDATE-GUIDE.txt
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - delete:installer.log
+    - renamereg:^forge-:server.jar
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
