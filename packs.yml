@@ -161,6 +161,11 @@ packs:
     - deletereg:installer.jar$
     - delete:installer.log
     - renamereg:^forge-:server.jar
+  496007: #valhelsiaenhancedvanilla
+    - delete:README.txt
+    - delete:ServerStart.bat
+    - fabricrun:ServerStart.sh
+    - delete:ServerStart.sh
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
