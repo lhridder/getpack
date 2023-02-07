@@ -183,6 +183,11 @@ packs:
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
+  542763: #create
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - delete:installer.log
+    - renamereg:^forge-:server.jar
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
