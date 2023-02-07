@@ -122,6 +122,7 @@ func Instructions(instructions []string) error {
 				line = strings.TrimSpace(line)
 				if strings.HasPrefix(line, "FORGE_VERSION") {
 					forgeversion = strings.Split(line, "=")[1]
+					break
 				}
 				if strings.HasPrefix(line, "MODLOADER_VERSION") || strings.HasPrefix(line, "FORGE") {
 					forgeversion = strings.Split(line, "\"")[1]
