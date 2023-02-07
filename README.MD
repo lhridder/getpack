@@ -91,6 +91,9 @@ See practical examples in packs.yml
 #### fabricgrep
 `fabricgrep:filename` read specified file, search for fabric version and install it.
 
+#### fabricrun
+`fabricrun:filename` read specified file, search for fabric installer and install it.
+
 #### bashrun
 `bashrun:arg` execute specified bash command.
 

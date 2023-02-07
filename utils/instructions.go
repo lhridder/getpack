@@ -180,9 +180,11 @@ func Instructions(instructions []string) error {
 				line = strings.TrimSpace(line)
 				if strings.HasPrefix(line, "FABRIC_INSTALLER_VERSION") {
 					fabricinstallerversion = strings.Split(line, "\"")[1]
+					continue
 				}
 				if strings.HasPrefix(line, "FABRIC_INSTALLER_URL") {
 					fabricurl = strings.Split(line, "\"")[1]
+					continue
 				}
 				if strings.HasPrefix(line, "MINECRAFT_VERSION") {
 					mcversion = strings.Split(line, "\"")[1]
@@ -229,7 +231,69 @@ func Instructions(instructions []string) error {
 
 			err = os.Remove("installer.jar")
 			if err != nil {
-				return fmt.Errorf("failed to remove installer log: %s", err)
+				return fmt.Errorf("failed to remove installer: %s", err)
+			}
+		case "fabricrun":
+			file, err := ioutil.ReadFile(parts[1])
+			if err != nil {
+				return fmt.Errorf("cant read file: %s", err)
+			}
+
+			fabricversion := ""
+			installerversion := ""
+			mcversion := ""
+
+			for _, line := range strings.Split(string(file), "\n") {
+				line = strings.TrimSpace(line)
+				if strings.HasPrefix(line, "FABRIC_LOADER_VERSION") {
+					fabricversion = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "FABRIC_VERSION") {
+					installerversion = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MC_VERSION") {
+					mcversion = strings.Split(line, "\"")[1]
+				}
+			}
+
+			installer := installerversion + "-installer.jar"
+
+			output, err := exec.Command("java", "-jar", installer, "server", "-mcversion", mcversion, "-loader", fabricversion, "-downloadMinecraft").Output()
+			if err != nil {
+				log.Println(string(output))
+				return fmt.Errorf("failed to run installer for %s: %s", mcversion, err)
+			}
+
+			err = os.Rename("server.jar", "vanilla.jar")
+			if err != nil {
+				return fmt.Errorf("failed to rename server jar: %s", err)
+			}
+
+			err = os.Rename("fabric-server-launch.jar", "server.jar")
+			if err != nil {
+				return fmt.Errorf("failed to rename server jar: %s", err)
+			}
+
+			fabricfile, err := os.Create("fabric-server-launcher.properties")
+			if err != nil {
+				return fmt.Errorf("failed to create fabricfile: %s", err)
+			}
+
+			_, err = fmt.Fprintln(fabricfile, "serverJar=vanilla.jar")
+			if err != nil {
+				return fmt.Errorf("failed to write text to fabricfile: %s", err)
+			}
+
+			err = fabricfile.Close()
+			if err != nil {
+				return fmt.Errorf("failed to close fabricfile: %s", err)
+			}
+
+			err = os.Remove(installer)
+			if err != nil {
+				return fmt.Errorf("failed to remove installer: %s", err)
 			}
 		case "bashrun":
 			output, err := exec.Command("bash", parts[1]).Output()
