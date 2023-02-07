@@ -166,6 +166,11 @@ packs:
     - delete:ServerStart.bat
     - fabricrun:ServerStart.sh
     - delete:ServerStart.sh
+  466761: #crazycraftupdated
+    - delete:start.ps1
+    - forgegrep:start.sh
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
   #ftb
   100: #stoneblock3
     - delete:log4jfix/
