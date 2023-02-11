@@ -35,13 +35,13 @@ enabled:
 curse:
   apikey: insert your curseforge api key here
   modpacks:
-    - insert modpack id here
+    packname: packid
 technic:
   modpacks:
     - insert modpack name here
 ftb:
   modpacks:
-    - insert modpack id here
+    packname: packid
 paper:
   version: insert minecraft version here
 purpur:

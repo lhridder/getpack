@@ -22,14 +22,14 @@ type Config struct {
 		Bedrock bool `yaml:"bedrock"`
 	}
 	Curse struct {
-		APIkey   string `yaml:"apikey"`
-		Modpacks []int  `yaml:"modpacks"`
+		APIkey   string         `yaml:"apikey"`
+		Modpacks map[string]int `yaml:"modpacks"`
 	}
 	Technic struct {
 		Modpacks []string `yaml:"modpacks"`
 	}
 	FTB struct {
-		Modpacks []int `yaml:"modpacks"`
+		Modpacks map[string]int `yaml:"modpacks"`
 	}
 	Paper struct {
 		Version string `yaml:"version"`

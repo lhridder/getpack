@@ -179,17 +179,17 @@ func getPacks() error {
 			}
 		}
 
-		for _, pack := range cfg.Curse.Modpacks {
-			log.Printf("Starting install of curse modpack %d", pack)
-			cursepack, err := curseforge.Get(pack)
+		for packname, packid := range cfg.Curse.Modpacks {
+			log.Printf("Starting install of curse modpack %s", packname)
+			cursepack, err := curseforge.Get(packid)
 			if err != nil {
-				log.Printf("Failed to get %d: %s", pack, err)
+				log.Printf("Failed to get %s: %s", packname, err)
 				continue
 			}
 			log.Printf("Found pack %s with version %s", cursepack.Data.Name, cursepack.Version)
-			err = curseforge.Install(cursepack)
+			err = cursepack.Install(packname)
 			if err != nil {
-				log.Printf("Failed to install %d: %s", pack, err)
+				log.Printf("Failed to install %s: %s", packname, err)
 			}
 
 			err = os.Chdir(dir + "/curseinstaller")
@@ -197,7 +197,7 @@ func getPacks() error {
 				return fmt.Errorf("failed to change directories back: %s", err)
 			}
 
-			err = os.RemoveAll(cursepack.Data.Name)
+			err = os.RemoveAll(packname)
 			if err != nil {
 				return fmt.Errorf("failed to delete %s folder: %s", cursepack.Data.Name, err)
 			}
@@ -290,18 +290,18 @@ func getPacks() error {
 			}
 		}
 
-		for _, pack := range cfg.FTB.Modpacks {
-			log.Printf("Starting install of ftb modpack %d", pack)
-			ftbpack, err := ftb.Get(pack)
+		for packname, packid := range cfg.FTB.Modpacks {
+			log.Printf("Starting install of ftb modpack %s", packname)
+			ftbpack, err := ftb.Get(packid)
 			if err != nil {
-				log.Printf("Failed to get %s: %s", pack, err)
+				log.Printf("Failed to get %s: %s", packname, err)
 				continue
 			}
 
 			log.Printf("Found pack %s with version %s", ftbpack.Name, ftbpack.Version.Name)
-			err = ftb.Install(ftbpack)
+			err = ftbpack.Install(packname)
 			if err != nil {
-				log.Printf("Failed to install %s: %s", pack, err)
+				log.Printf("Failed to install %s: %s", packname, err)
 			}
 
 			err = os.Chdir("..")
@@ -309,7 +309,7 @@ func getPacks() error {
 				return fmt.Errorf("failed to change directories back: %s", err)
 			}
 
-			err = os.RemoveAll(ftbpack.Name)
+			err = os.RemoveAll(packname)
 			if err != nil {
 				return fmt.Errorf("failed to delete %s folder: %s", ftbpack.Name, err)
 			}

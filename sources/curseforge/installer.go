@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func Install(pack *Cursepack) error {
+func (pack *Cursepack) Install(packname string) error {
 	start := time.Now()
 
 	instructions := config.Global.Packs[pack.Data.ID]
@@ -19,12 +19,12 @@ func Install(pack *Cursepack) error {
 		return fmt.Errorf("instructions for pack are too short/not available")
 	}
 
-	err := os.Mkdir(pack.Data.Name, os.ModePerm)
+	err := os.Mkdir(packname, os.ModePerm)
 	if err != nil {
 		return fmt.Errorf("failed to create folder: %s", err)
 	}
 
-	err = os.Chdir(pack.Data.Name)
+	err = os.Chdir(packname)
 	if err != nil {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
@@ -57,7 +57,7 @@ func Install(pack *Cursepack) error {
 		return fmt.Errorf("failed to zip pack: %s", err)
 	}
 
-	folder := fmt.Sprintf("%scurse/%s/", config.Global.Target, pack.Data.Name)
+	folder := fmt.Sprintf("%scurse/%s/", config.Global.Target, packname)
 	_, err = os.Stat(folder)
 	if os.IsNotExist(err) {
 		err = os.Mkdir(folder, os.ModePerm)
@@ -71,7 +71,7 @@ func Install(pack *Cursepack) error {
 		return fmt.Errorf("failed to move zip to target folder: %s", err)
 	}
 
-	log.Printf("Finished installing %s version %s in %.2fs", pack.Data.Name, pack.Version, time.Now().Sub(start).Seconds())
+	log.Printf("Finished installing %s version %s in %.2fs", packname, pack.Version, time.Now().Sub(start).Seconds())
 
 	return nil
 }

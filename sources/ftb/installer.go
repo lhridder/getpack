@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-func Install(pack *FTBpack) error {
+func (pack *FTBpack) Install(packname string) error {
 	start := time.Now()
 
 	instructions := config.Global.Packs[pack.Id]
@@ -20,12 +20,12 @@ func Install(pack *FTBpack) error {
 		return fmt.Errorf("instructions for pack are too short/not available")
 	}
 
-	err := os.Mkdir(pack.Name, os.ModePerm)
+	err := os.Mkdir(packname, os.ModePerm)
 	if err != nil {
 		return fmt.Errorf("failed to create folder: %s", err)
 	}
 
-	err = os.Chdir(pack.Name)
+	err = os.Chdir(packname)
 	if err != nil {
 		return fmt.Errorf("failed to go to folder: %s", err)
 	}
@@ -63,7 +63,7 @@ func Install(pack *FTBpack) error {
 		return fmt.Errorf("failed to zip pack: %s", err)
 	}
 
-	folder := fmt.Sprintf("%sftb/%s/", config.Global.Target, pack.Name)
+	folder := fmt.Sprintf("%sftb/%s/", config.Global.Target, packname)
 	_, err = os.Stat(folder)
 	if os.IsNotExist(err) {
 		err = os.Mkdir(folder, os.ModePerm)
