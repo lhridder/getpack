@@ -20,7 +20,7 @@ type TechnicPack struct {
 }
 
 const (
-	base   = "http://api.technicpack.net/modpack/"
+	base   = "https://api.technicpack.net/modpack/"
 	suffix = "?build=<build>"
 )
 
