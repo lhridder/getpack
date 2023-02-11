@@ -29,6 +29,7 @@ packs:
   572778: #rad2
     - cdreg:^RAD2-Serverpack
     - delete:LaunchServer.bat
+    - delete:LaunchServer.sh
     - delete:1.16.5.json
     - renamereg:^forge-:server.jar
     - delete:eula.txt
