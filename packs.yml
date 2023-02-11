@@ -77,7 +77,6 @@ packs:
     - deletereg:.sh$
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
-    - delete:installer.log
     - renamereg:^forge-:server.jar
   458201: #vaulthunters2
     - delete:start.ps1
@@ -159,7 +158,6 @@ packs:
     - delete:UPDATE-GUIDE.txt
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
-    - delete:installer.log
     - renamereg:^forge-:server.jar
   496007: #valhelsiaenhancedvanilla
     - delete:README.txt
@@ -172,7 +170,6 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:start.sh
   290913: #stoneblock
-    - delete:1.12.2.json
     - delete:Install.bat
     - delete:Install.sh
     - delete:Instructions.txt
@@ -182,11 +179,11 @@ packs:
     - delete:settings.sh
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
+    - delete:1.12.2.json
     - renamereg:^forge-:server.jar
   542763: #create
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
-    - delete:installer.log
     - renamereg:^forge-:server.jar
   268208: #sevtechages
     - delete:Install.bat
@@ -199,7 +196,6 @@ packs:
     - delete:UPDATE-GUIDE.txt
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
-    - delete:installer.log
     - renamereg:^forge-:server.jar
   #ftb
   4: #stoneblock2
@@ -207,28 +203,23 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:start.sh
     - delete:version.json
-    - delete:installer.log
   100: #stoneblock3
     - delete:log4jfix/
     - shforgegrep:start.sh
     - delete:start.sh
     - delete:version.json
-    - delete:installer.log
   101: #direwolf201.19
     - delete:log4jfix/
     - shforgegrep:start.sh
     - delete:start.sh
     - delete:version.json
-    - delete:installer.log
   35: #revelation
     - delete:log4jfix/
     - renamereg:^forge-:server.jar
     - delete:start.sh
     - delete:version.json
-    - delete:installer.log
   91: #oceanblock
     - delete:log4jfix/
     - renamereg:^forge-:server.jar
     - delete:start.sh
     - delete:version.json
-    - delete:installer.log

@@ -161,9 +161,20 @@ func Instructions(instructions []string) error {
 				return fmt.Errorf("failed to remove installer: %s", err)
 			}
 
-			err = os.Remove("installer.log")
-			if err != nil {
-				return fmt.Errorf("failed to remove installer log: %s", err)
+			_, err = os.Stat("installer.log")
+			if err == nil {
+				err = os.Remove("installer.log")
+				if err != nil {
+					return fmt.Errorf("failed to remove installer log: %s", err)
+				}
+			}
+
+			_, err = os.Stat("forge-installer.jar.log")
+			if err == nil {
+				err = os.Remove("forge-installer.jar.log")
+				if err != nil {
+					return fmt.Errorf("failed to remove installer log: %s", err)
+				}
 			}
 		case "fabricgrep":
 			file, err := ioutil.ReadFile(parts[1])
