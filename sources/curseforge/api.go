@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 type file struct {
@@ -117,7 +118,7 @@ func Get(packid int) (*Cursepack, error) {
 	}
 
 	pack.URL = url
-	pack.Version = latestfile.DisplayName
+	pack.Version = strings.ReplaceAll(latestfile.DisplayName, ".zip", "")
 
 	return pack, nil
 }
