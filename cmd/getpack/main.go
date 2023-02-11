@@ -187,6 +187,14 @@ func getPacks() error {
 				continue
 			}
 			log.Printf("Found pack %s with version %s", cursepack.Data.Name, cursepack.Version)
+
+			file := fmt.Sprintf("%scurse/%s/%s.zip", config.Global.Target, packname, cursepack.Version)
+			_, err = os.Stat(file)
+			if err == nil {
+				log.Printf("Version %s already installed, continueing...", cursepack.Version)
+				continue
+			}
+
 			err = cursepack.Install(packname)
 			if err != nil {
 				log.Printf("Failed to install %s: %s", packname, err)
@@ -243,6 +251,14 @@ func getPacks() error {
 			}
 
 			log.Printf("Found pack %s with version %s", technicpack.DisplayName, technicpack.Version)
+
+			file := fmt.Sprintf("%stechnic/%s/%s.zip", config.Global.Target, pack, technicpack.Version)
+			_, err = os.Stat(file)
+			if err == nil {
+				log.Printf("Version %s already installed, continueing...", technicpack.Version)
+				continue
+			}
+
 			err = technic.Install(technicpack)
 			if err != nil {
 				log.Printf("Failed to install %s: %s", pack, err)
@@ -299,6 +315,14 @@ func getPacks() error {
 			}
 
 			log.Printf("Found pack %s with version %s", ftbpack.Name, ftbpack.Version.Name)
+
+			file := fmt.Sprintf("%sftb/%s/%s.zip", config.Global.Target, packname, ftbpack.Version.Name)
+			_, err = os.Stat(file)
+			if err == nil {
+				log.Printf("Version %s already installed, continueing...", ftbpack.Version.Name)
+				continue
+			}
+
 			err = ftbpack.Install(packname)
 			if err != nil {
 				log.Printf("Failed to install %s: %s", packname, err)

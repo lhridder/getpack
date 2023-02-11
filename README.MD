@@ -4,7 +4,6 @@
 ### TODO
 - Docker building and testing
 - Webhook/Discord error handling
-- Store currently installed version of pack
 - GUI?
 
 ### Features
@@ -17,6 +16,7 @@
 - curseforge installing
 - technicpack installing
 - ftb installing
+- only install new version if not installed yet
 
 ## Config
 config.yml layout:

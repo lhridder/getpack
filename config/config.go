@@ -7,9 +7,9 @@ import (
 )
 
 type Config struct {
-	Debug   bool
-	Target  string `yaml:"target"`
-	Packs   map[int][]string
+	Debug   bool             `yaml:"debug"`
+	Target  string           `yaml:"target"`
+	Packs   map[int][]string `yaml:"packs"`
 	Enabled struct {
 		Curse   bool `yaml:"curse"`
 		Technic bool `yaml:"technic"`
