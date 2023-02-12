@@ -102,3 +102,6 @@ See practical examples in packs.yml
 
 #### forge
 `forge:version` install latest forge version for specified **mcversion** in current folder.
+
+#### fabric
+`fabric:version` install latest fabric version for specified **mcversion** in current folder.

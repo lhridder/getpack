@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"getpack/config"
+	"getpack/sources/fabric"
 	"getpack/sources/forge"
 	"getpack/util"
 	"io/ioutil"
@@ -276,29 +277,9 @@ func Instructions(instructions []string) error {
 				return fmt.Errorf("failed to run installer for %s: %s", mcversion, err)
 			}
 
-			err = os.Rename("server.jar", "vanilla.jar")
+			err = fabric.PostInstall()
 			if err != nil {
-				return fmt.Errorf("failed to rename server jar: %s", err)
-			}
-
-			err = os.Rename("fabric-server-launch.jar", "server.jar")
-			if err != nil {
-				return fmt.Errorf("failed to rename server jar: %s", err)
-			}
-
-			fabricfile, err := os.Create("fabric-server-launcher.properties")
-			if err != nil {
-				return fmt.Errorf("failed to create fabricfile: %s", err)
-			}
-
-			_, err = fmt.Fprintln(fabricfile, "serverJar=vanilla.jar")
-			if err != nil {
-				return fmt.Errorf("failed to write text to fabricfile: %s", err)
-			}
-
-			err = fabricfile.Close()
-			if err != nil {
-				return fmt.Errorf("failed to close fabricfile: %s", err)
+				return fmt.Errorf("failed to run fabric postinstall: %s", err)
 			}
 
 			err = os.Remove(installer)
@@ -354,6 +335,33 @@ func Instructions(instructions []string) error {
 			err := forge.Install(mcversion)
 			if err != nil {
 				return fmt.Errorf("failed to install forge: %s", err)
+			}
+		case "fabric":
+			mcversion := parts[1]
+			url, err := fabric.GetInstaller()
+			if err != nil {
+				return fmt.Errorf("failed to get fabric installer url: %s", err)
+			}
+
+			err = util.Download(url, "installer.jar")
+			if err != nil {
+				return fmt.Errorf("failed to download installer: %s", err)
+			}
+
+			output, err := exec.Command("java", "-jar", "installer.jar", "server", "-mcversion", mcversion, "-downloadMinecraft").Output()
+			if err != nil {
+				log.Println(string(output))
+				return fmt.Errorf("failed to run installer: %s", err)
+			}
+
+			err = os.Remove("installer.jar")
+			if err != nil {
+				return fmt.Errorf("failed to delete installer: %s", err)
+			}
+
+			err = fabric.PostInstall()
+			if err != nil {
+				return fmt.Errorf("failed to run fabric postinstall: %s", err)
 			}
 		}
 		if config.Global.Debug {

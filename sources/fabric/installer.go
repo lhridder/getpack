@@ -55,29 +55,9 @@ func Install(url string) error {
 			log.Printf("Running fabric %s installer took %.2fs", mcversion, time.Now().Sub(startversion).Seconds())
 		}
 
-		err = os.Rename("server.jar", "vanilla.jar")
+		err = PostInstall()
 		if err != nil {
-			return fmt.Errorf("failed to rename server jar: %s", err)
-		}
-
-		err = os.Rename("fabric-server-launch.jar", "server.jar")
-		if err != nil {
-			return fmt.Errorf("failed to rename server jar: %s", err)
-		}
-
-		fabricfile, err := os.Create("fabric-server-launcher.properties")
-		if err != nil {
-			return fmt.Errorf("failed to create fabricfile: %s", err)
-		}
-
-		_, err = fmt.Fprintln(fabricfile, "serverJar=vanilla.jar")
-		if err != nil {
-			return fmt.Errorf("failed to write text to fabricfile: %s", err)
-		}
-
-		err = fabricfile.Close()
-		if err != nil {
-			return fmt.Errorf("failed to close fabricfile: %s", err)
+			return fmt.Errorf("failed to run postinstall: %s", err)
 		}
 
 		zipname := fmt.Sprintf("%s.zip", mcversion)
@@ -110,6 +90,35 @@ func Install(url string) error {
 	}
 
 	log.Printf("Finished installing fabric versions in %.2fs", time.Now().Sub(start).Seconds())
+
+	return nil
+}
+
+func PostInstall() error {
+	err := os.Rename("server.jar", "vanilla.jar")
+	if err != nil {
+		return fmt.Errorf("failed to rename server jar: %s", err)
+	}
+
+	err = os.Rename("fabric-server-launch.jar", "server.jar")
+	if err != nil {
+		return fmt.Errorf("failed to rename server jar: %s", err)
+	}
+
+	fabricfile, err := os.Create("fabric-server-launcher.properties")
+	if err != nil {
+		return fmt.Errorf("failed to create fabricfile: %s", err)
+	}
+
+	_, err = fmt.Fprintln(fabricfile, "serverJar=vanilla.jar")
+	if err != nil {
+		return fmt.Errorf("failed to write text to fabricfile: %s", err)
+	}
+
+	err = fabricfile.Close()
+	if err != nil {
+		return fmt.Errorf("failed to close fabricfile: %s", err)
+	}
 
 	return nil
 }
