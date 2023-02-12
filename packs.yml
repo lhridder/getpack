@@ -197,6 +197,10 @@ packs:
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
+  545167: #dreamcraft-new
+    - cdreg:^1.19.2
+    - delete:README.txt
+    - fabric:1.19.2
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
