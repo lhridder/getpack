@@ -200,6 +200,10 @@ packs:
     - cdreg:^1.19.2
     - delete:README.txt
     - fabric:1.19.2
+  402412: #litv2
+    - cdreg:^LITV2-Serverpack
+    - renamereg:^forge-:server.jar
+    - delete:LaunchServer.bat
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
