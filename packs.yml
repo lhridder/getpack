@@ -204,6 +204,9 @@ packs:
     - cdreg:^LITV2-Serverpack
     - renamereg:^forge-:server.jar
     - delete:LaunchServer.bat
+  829758: #dawncraft
+    - delete:SERVER_README.txt
+    - forge:1.18.2
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
