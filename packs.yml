@@ -240,3 +240,8 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:start.sh
     - delete:version.json
+  103: #skies
+    - delete:log4jfix/
+    - shforgegrep:start.sh
+    - delete:start.sh
+    - delete:version.json
