@@ -248,3 +248,8 @@ packs:
     - shforgegrep:start.sh
     - delete:start.sh
     - delete:version.json
+  8: #skyodyssey
+    - delete:log4jfix/
+    - renamereg:^forge-:server.jar
+    - delete:start.sh
+    - delete:version.json
