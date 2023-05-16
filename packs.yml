@@ -38,6 +38,10 @@ packs:
     - forgegrep:startserver.sh
     - renamereg:^forge-:server.jar
     - delete:startserver.sh
+  442246: #atm6sky
+    - delete:startserver.bat
+    - renamereg:^forge-:server.jar
+    - delete:startserver.sh
   426926: #atm7
     - delete:user_jvm_args.txt
     - delete:startserver.bat
