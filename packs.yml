@@ -216,6 +216,11 @@ packs:
     - delete:start.sh
     - delete:start.ps1
     - fabric:1.19.2
+  848718: #bigchadguysplus
+    - delete:eula.txt
+    - delete:help.txt
+    - delete:startserver.bat
+    - renamereg:^fabric-server:server.jar
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
