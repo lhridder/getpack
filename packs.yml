@@ -221,6 +221,9 @@ packs:
     - delete:help.txt
     - delete:startserver.bat
     - renamereg:^fabric-server:server.jar
+  868307: #newlifesmp
+    - delete:start.bat
+    - renamereg:^fabric-server:server.jar
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
