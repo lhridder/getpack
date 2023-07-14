@@ -228,6 +228,9 @@ packs:
   868307: #newlifesmp
     - delete:start.bat
     - renamereg:^fabric-server:server.jar
+  256289: #ozone-3
+    - renamereg:^forge-:server.jar
+    - delete:start.bat
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
