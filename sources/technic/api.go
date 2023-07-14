@@ -12,6 +12,7 @@ type TechnicPack struct {
 	Name          string `json:"name"`
 	DisplayName   string `json:"displayName"`
 	PlatformURL   string `json:"platformUrl"`
+	Description   string `json:"description"`
 	Version       string `json:"version"`
 	ServerPackURL string `json:"serverPackUrl"`
 	Logo          struct {

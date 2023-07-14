@@ -57,7 +57,7 @@ func Install(pack *TechnicPack) error {
 		return fmt.Errorf("failed to zip pack: %s", err)
 	}
 
-	folder := fmt.Sprintf("%stechnic/%s/", config.Global.Target, pack.Name)
+	folder := fmt.Sprintf("%smodpacks/technic/%s/", config.Global.Target, pack.Name)
 	_, err = os.Stat(folder)
 	if os.IsNotExist(err) {
 		err = os.Mkdir(folder, os.ModePerm)

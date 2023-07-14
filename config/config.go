@@ -9,6 +9,7 @@ import (
 type Config struct {
 	Debug   bool             `yaml:"debug"`
 	Target  string           `yaml:"target"`
+	Deploy  bool             `yaml:"deploy"`
 	Packs   map[int][]string `yaml:"packs"`
 	Enabled struct {
 		Curse   bool `yaml:"curse"`

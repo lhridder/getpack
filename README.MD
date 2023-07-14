@@ -3,7 +3,6 @@
 
 ### TODO
 - Docker building and testing
-- Webhook/Discord error handling
 - GUI?
 
 ### Features
@@ -17,11 +16,15 @@
 - technicpack installing
 - ftb installing
 - only install new version if not installed yet
+- collecting all modpacks in list.json for easy deployment
+- discord bot logger functionality
 
 ## Config
 config.yml layout:
 ```yaml
 target: /path/to/folder
+debug: false
+deploy: false
 enabled:
   curse: false
   technic: false

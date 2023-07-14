@@ -63,7 +63,7 @@ func (pack *FTBpack) Install(packname string) error {
 		return fmt.Errorf("failed to zip pack: %s", err)
 	}
 
-	folder := fmt.Sprintf("%sftb/%s/", config.Global.Target, packname)
+	folder := fmt.Sprintf("%smodpacks/ftb/%s/", config.Global.Target, packname)
 	_, err = os.Stat(folder)
 	if os.IsNotExist(err) {
 		err = os.Mkdir(folder, os.ModePerm)

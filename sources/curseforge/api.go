@@ -11,10 +11,11 @@ import (
 )
 
 type file struct {
-	DisplayName      string `json:"displayName"`
-	FileName         string `json:"fileName"`
-	ServerPackFileID int    `json:"serverPackFileId"`
-	IsServerPack     bool   `json:"isServerPack"`
+	DisplayName      string   `json:"displayName"`
+	FileName         string   `json:"fileName"`
+	ServerPackFileID int      `json:"serverPackFileId"`
+	IsServerPack     bool     `json:"isServerPack"`
+	GameVersions     []string `json:"gameVersions"`
 }
 
 type serverpack struct {

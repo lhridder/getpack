@@ -8,11 +8,20 @@ import (
 	"strconv"
 )
 
-type ftbversion struct {
+type ftbtarget struct {
+	Version string `json:"version"`
 	Id      int    `json:"id"`
 	Name    string `json:"name"`
 	Type    string `json:"type"`
 	Updated int    `json:"updated"`
+}
+
+type ftbversion struct {
+	Id      int         `json:"id"`
+	Name    string      `json:"name"`
+	Type    string      `json:"type"`
+	Updated int         `json:"updated"`
+	Targets []ftbtarget `json:"targets"`
 }
 
 type ftbart struct {
@@ -27,6 +36,7 @@ type FTBpack struct {
 	Name          string       `json:"name"`
 	Versions      []ftbversion `json:"versions"`
 	Art           []ftbart     `json:"art"`
+	Description   string       `json:"description"`
 	Version       ftbversion
 	ServerPackURL string
 }
