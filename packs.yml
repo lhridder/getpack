@@ -19,6 +19,12 @@ packs:
     - delete:launch.bat
     - delete:launch.sh
     - rename:BTeam.jar:server.jar
+  896745: #hexxit-ii
+    - renamereg:^forge-:server.jar
+    - delete:LaunchServer.bat
+    - delete:LaunchServer.sh
+    - delete:RestoreBackup.bat
+    - delete:RestoreBackup.sh
   #curse
   353156: #1.12.2pack
     - deletereg:^RestoreBackup
