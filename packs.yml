@@ -15,6 +15,10 @@ packs:
     - deletereg:installer.jar$
     - deletereg:installer.jar.log$
     - renamereg:^forge-:server.jar
+  552556: #attack-of-the-bteam
+    - delete:launch.bat
+    - delete:launch.sh
+    - rename:BTeam.jar:server.jar
   #curse
   353156: #1.12.2pack
     - deletereg:^RestoreBackup
