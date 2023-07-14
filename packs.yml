@@ -250,6 +250,11 @@ packs:
     - delete:LaunchServer.command
     - delete:LaunchServer.sh
     - delete:log4j2.xml
+  274563: #hexxit-updated
+    - renamereg:^forge-:server.jar
+    - delete:Launch.bat
+    - delete:options.txt
+    - delete:eula.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
