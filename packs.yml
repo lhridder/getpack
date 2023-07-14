@@ -238,6 +238,9 @@ packs:
     - delete:ServerStart.sh
     - delete:ServerStart.bat
     - delete:README.txt
+  301717: #ddss
+    - renamereg:^forge-:server.jar
+    - delete:serverstart.bat
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
