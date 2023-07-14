@@ -32,6 +32,10 @@ enabled:
   fabric: false
   bedrock: false
   spigot: false
+discord:
+  enabled: false
+  token: insert the discord bot token here
+  channel: insert the desired target channel id here
 curse:
   apikey: insert your curseforge api key here
   modpacks:

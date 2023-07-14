@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"getpack/config"
+	"getpack/discord"
 	"getpack/sources/bedrock"
 	"getpack/sources/curseforge"
 	"getpack/sources/fabric"
@@ -31,6 +32,15 @@ func main() {
 	cfg = config.Global
 	dir, _ = os.Getwd()
 
+	if cfg.Discord.Enabled {
+		file, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		if err != nil {
+			log.Printf("Failed to open log.txt: %s", err)
+		}
+		defer file.Close()
+		log.SetOutput(file)
+	}
+
 	log.Printf("Starting getpack with debug: %s", strconv.FormatBool(cfg.Debug))
 
 	err = getVersions()
@@ -41,6 +51,13 @@ func main() {
 	err = getPacks()
 	if err != nil {
 		log.Println(err)
+	}
+
+	if cfg.Discord.Enabled {
+		err = discord.SendLog()
+		if err != nil {
+			log.Printf("Failed to log to discord: %s", err)
+		}
 	}
 }
 

@@ -21,6 +21,11 @@ type Config struct {
 		Fabric  bool `yaml:"fabric"`
 		Bedrock bool `yaml:"bedrock"`
 	}
+	Discord struct {
+		Enabled bool   `yaml:"enabled"`
+		Token   string `yaml:"token"`
+		Channel string `yaml:"channel"`
+	}
 	Curse struct {
 		APIkey   string         `yaml:"apikey"`
 		Modpacks map[string]int `yaml:"modpacks"`
