@@ -33,6 +33,7 @@ func Install(url string) error {
 	}
 
 	for _, mcversion := range config.Global.Fabric.Versions {
+		log.Println("")
 		startversion := time.Now()
 
 		err := os.Mkdir(mcversion, os.ModePerm)

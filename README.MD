@@ -54,7 +54,8 @@ fabric:
   versions:
     - insert minecraft version here
 forge:
-  version: insert minecraft version here
+  versions:
+    - insert minecraft version here
 spigot:
   version: insert minecraft version here
 ```

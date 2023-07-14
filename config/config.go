@@ -46,7 +46,7 @@ type Config struct {
 		Version string `yaml:"version"`
 	}
 	Forge struct {
-		Version string `yaml:"version"`
+		Versions []string `yaml:"versions"`
 	}
 	Fabric struct {
 		Versions []string `yaml:"versions"`
