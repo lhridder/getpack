@@ -241,6 +241,15 @@ packs:
   301717: #ddss
     - renamereg:^forge-:server.jar
     - delete:serverstart.bat
+  254202: #farmingvalley
+    - cdreg:^FarmingValleyServer
+    - renamereg:^forge-:server.jar
+    - delete:server.json
+    - delete:options.txt
+    - delete:LaunchServer.bat
+    - delete:LaunchServer.command
+    - delete:LaunchServer.sh
+    - delete:log4j2.xml
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
