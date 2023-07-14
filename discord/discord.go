@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+const Logfile = "log.txt"
+
 func SendLog() error {
 	cfg := config.Global.Discord
 
@@ -20,12 +22,12 @@ func SendLog() error {
 		return fmt.Errorf("failed to open bot connection: %s", err)
 	}
 
-	file, err := os.Open("log.txt")
+	file, err := os.Open(Logfile)
 	if err != nil {
-		return fmt.Errorf("failed to open log file: %s, err")
+		return fmt.Errorf("failed to open log file: %s", err)
 	}
 
-	_, err = bot.ChannelFileSend(cfg.Channel, "log.txt", file)
+	_, err = bot.ChannelFileSend(cfg.Channel, Logfile, file)
 	if err != nil {
 		return fmt.Errorf("failed to send file, %s", err)
 	}

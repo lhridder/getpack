@@ -33,7 +33,7 @@ func main() {
 	dir, _ = os.Getwd()
 
 	if cfg.Discord.Enabled {
-		file, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		file, err := os.OpenFile(discord.Logfile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
 			log.Printf("Failed to open log.txt: %s", err)
 		}
