@@ -261,6 +261,9 @@ packs:
     - delete:Launch.bat
     - delete:options.txt
     - delete:eula.txt
+  846307: #createlive4
+    - deletereg:mich.txt$
+    - delete:eula.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
