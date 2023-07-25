@@ -123,7 +123,7 @@ packs:
     - cdreg:^Better
     - delete:start.ps1
     - delete:READ_ME.txt
-    - fabricgrep:start.sh
+    - fabric:1.19.2
     - delete:start.sh
   456356: #medievalmc
     - cdreg:^Medieval
