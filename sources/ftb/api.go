@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 type ftbtarget struct {
@@ -65,6 +66,8 @@ func Get(packid int) (*FTBpack, error) {
 	}
 
 	pack.Version = pack.Versions[len(pack.Versions)-1]
+	parts := strings.Split(pack.Version.Name, " ")
+	pack.Version.Name = parts[len(parts)-1]
 
 	pack.ServerPackURL = fmt.Sprintf("%s%d/%d/server/linux", base, packid, pack.Version.Id)
 

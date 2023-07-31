@@ -119,7 +119,8 @@ func Get(packid int) (*Cursepack, error) {
 	}
 
 	pack.URL = url
-	pack.Version = strings.ReplaceAll(latestfile.DisplayName, ".zip", "")
+	parts := strings.Split(strings.ReplaceAll(latestfile.DisplayName, ".zip", ""), " ")
+	pack.Version = parts[len(parts)-1]
 
 	return pack, nil
 }

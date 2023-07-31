@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 type TechnicPack struct {
@@ -45,6 +46,9 @@ func Get(packname string) (*TechnicPack, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to unmarshal body: %s", err)
 	}
+
+	parts := strings.Split(pack.Version, " ")
+	pack.Version = parts[len(parts)-1]
 
 	return pack, nil
 }
