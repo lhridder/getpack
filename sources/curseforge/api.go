@@ -124,7 +124,6 @@ func Get(packid int) (*Cursepack, error) {
 	for _, part := range parts {
 		if regexp.MustCompile(`\d`).MatchString(part) {
 			pack.Version = part
-			break
 		}
 	}
 

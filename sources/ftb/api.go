@@ -71,7 +71,6 @@ func Get(packid int) (*FTBpack, error) {
 	for _, part := range parts {
 		if regexp.MustCompile(`\d`).MatchString(part) {
 			pack.Version.Name = part
-			break
 		}
 	}
 

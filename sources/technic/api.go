@@ -52,7 +52,6 @@ func Get(packname string) (*TechnicPack, error) {
 	for _, part := range parts {
 		if regexp.MustCompile(`\d`).MatchString(part) {
 			pack.Version = part
-			break
 		}
 	}
 
