@@ -144,7 +144,7 @@ packs:
     - delete:READ_ME.txt
     - fabricgrep:start.sh
     - delete:start.sh
-  563655: #createflavored
+  844844: #createflavored
     - deletereg:^CHANGELOG
     - delete:SERVER-START.bat
     - delete:user_jvm_args.txt
