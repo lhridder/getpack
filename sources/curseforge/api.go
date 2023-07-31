@@ -123,7 +123,10 @@ func Get(packid int) (*Cursepack, error) {
 	parts := strings.Split(strings.ReplaceAll(latestfile.DisplayName, ".zip", ""), " ")
 	for _, part := range parts {
 		if regexp.MustCompile(`\d`).MatchString(part) {
-			pack.Version = part
+			//TODO integrate into regex
+			if !strings.HasPrefix(part, "[") {
+				pack.Version = part
+			}
 		}
 	}
 
