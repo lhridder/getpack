@@ -124,25 +124,43 @@ packs:
     - delete:variables.txt
     - delete:start.sh
     - delete:start.ps1
-  456356: #medievalmc
-    - cdreg:^Medieval
-    - delete:start.ps1
-    - deletereg:ME.txt$
-    - forgegrep:start.sh
-    - renamereg:^forge-:server.jar
-    - delete:start.sh
-  486989: #medievalmcnew
-    - cdreg:^Medieval
+  456356: #medievalmc1-forge
     - delete:start.ps1
     - delete:READ_ME.txt
-    - forgegrep:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
     - delete:start.sh
-    - delete:run.bat
-  461725: #medievalmcfabric
-    - cdreg:^Medieval
+  543633: #medievalmc2-forge
     - delete:start.ps1
     - delete:READ_ME.txt
-    - fabricgrep:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  486989: #medievalmc3-forge
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  876851: #medievalmc4-forge
+    - cdreg:^MMC4_FORGE
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  461725: #medievalmc1-fabric
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  876282: #medievalmc2-fabric
+    - cdreg:^MMC2_FABRIC
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
     - delete:start.sh
   844844: #createflavored
     - deletereg:^CHANGELOG
