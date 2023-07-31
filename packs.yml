@@ -99,24 +99,44 @@ packs:
     - delete:start.sh
   711537: #vaulthunters3
     - forge:1.18.2
-  429793: #bettermc
+  429793: #bettermc1-forge
     - cdreg:^Better
     - delete:start.ps1
-    - deletereg:ME.txt$
+    - delete:READ_ME.txt
     - forgegrep:start.sh
     - renamereg:^forge-:server.jar
     - delete:start.sh
-  482878: #bettermcnew
+  482878: #bettermc2-forge
     - delete:start.ps1
     - variablesgrep:variables.txt
     - delete:variables.txt
     - delete:READ_ME.txt
     - delete:start.sh
-  452013: #bettermcfabric
-    - cdreg:^Better
+  550864: #bettermc3-forge
+    - delete:start.ps1
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:READ_ME.txt
+    - delete:start.sh
+  876781: #bettermc4-forge
+    - cdreg:^BMC4_FORGE
     - delete:start.ps1
     - delete:READ_ME.txt
-    - fabric:1.19.2
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  452013: #bettermc1-fabric
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  873389: #bettermc2-fabric
+    - cdreg:^BMC2_FABRIC
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
     - delete:start.sh
   466901: #prominence-2
     - deletereg:^READ_ME
