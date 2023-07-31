@@ -295,6 +295,39 @@ func Instructions(instructions []string) error {
 			if err != nil {
 				return fmt.Errorf("failed to remove installer: %s", err)
 			}
+		case "variablesgrep":
+			file, err := ioutil.ReadFile(parts[1])
+			if err != nil {
+				return fmt.Errorf("cant read file: %s", err)
+			}
+
+			modloader := ""
+			mcversion := ""
+
+			for _, line := range strings.Split(string(file), "\n") {
+				line = strings.TrimSpace(line)
+				if strings.HasPrefix(line, "MODLOADER=") {
+					modloader = strings.Split(line, "=")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MINECRAFT_VERSION=") {
+					mcversion = strings.Split(line, "=")[1]
+				}
+			}
+
+			if modloader == "Fabric" {
+				err := fabricInstall(mcversion)
+				if err != nil {
+					return fmt.Errorf("failed to install fabric: %s", err)
+				}
+			}
+
+			if modloader == "Forge" {
+				err := forge.Install(mcversion)
+				if err != nil {
+					return fmt.Errorf("failed to install forge: %s", err)
+				}
+			}
 		case "bashrun":
 			output, err := exec.Command("bash", parts[1]).Output()
 			if err != nil {
@@ -347,35 +380,44 @@ func Instructions(instructions []string) error {
 			}
 		case "fabric":
 			mcversion := parts[1]
-			url, err := fabric.GetInstaller()
+			err := fabricInstall(mcversion)
 			if err != nil {
-				return fmt.Errorf("failed to get fabric installer url: %s", err)
-			}
-
-			err = util.Download(url, "installer.jar")
-			if err != nil {
-				return fmt.Errorf("failed to download installer: %s", err)
-			}
-
-			output, err := exec.Command("java", "-jar", "installer.jar", "server", "-mcversion", mcversion, "-downloadMinecraft").Output()
-			if err != nil {
-				log.Println(string(output))
-				return fmt.Errorf("failed to run installer: %s", err)
-			}
-
-			err = os.Remove("installer.jar")
-			if err != nil {
-				return fmt.Errorf("failed to delete installer: %s", err)
-			}
-
-			err = fabric.PostInstall()
-			if err != nil {
-				return fmt.Errorf("failed to run fabric postinstall: %s", err)
+				return fmt.Errorf("failed to install fabric: %s", err)
 			}
 		}
 		if config.Global.Debug {
 			log.Printf("Instruction '%s' took %.2fs", instruction, time.Now().Sub(start).Seconds())
 		}
 	}
+	return nil
+}
+
+func fabricInstall(mcversion string) error {
+	url, err := fabric.GetInstaller()
+	if err != nil {
+		return fmt.Errorf("failed to get fabric installer url: %s", err)
+	}
+
+	err = util.Download(url, "installer.jar")
+	if err != nil {
+		return fmt.Errorf("failed to download installer: %s", err)
+	}
+
+	output, err := exec.Command("java", "-jar", "installer.jar", "server", "-mcversion", mcversion, "-downloadMinecraft").Output()
+	if err != nil {
+		log.Println(string(output))
+		return fmt.Errorf("failed to run installer: %s", err)
+	}
+
+	err = os.Remove("installer.jar")
+	if err != nil {
+		return fmt.Errorf("failed to delete installer: %s", err)
+	}
+
+	err = fabric.PostInstall()
+	if err != nil {
+		return fmt.Errorf("failed to run fabric postinstall: %s", err)
+	}
+
 	return nil
 }

@@ -102,6 +102,9 @@ See practical examples in packs.yml
 #### fabricrun
 `fabricrun:filename` read specified file, search for fabric installer and install it.
 
+#### variablesgrep
+`variablesgrep:filename` read specified file, search for fabric/forge, minecraft version and install it.
+
 #### bashrun
 `bashrun:arg` execute specified bash command.
 
