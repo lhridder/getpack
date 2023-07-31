@@ -239,6 +239,8 @@ func getPacks() error {
 		}
 
 		for packname, packid := range cfg.Curse.Modpacks {
+			failed := false
+
 			log.Println("")
 			log.Printf("Starting install of curse modpack %s", packname)
 			cursepack, err := curseforge.Get(packid)
@@ -258,6 +260,7 @@ func getPacks() error {
 			err = cursepack.Install(packname)
 			if err != nil {
 				log.Printf("Failed to install %s: %s", packname, err)
+				failed = true
 			}
 
 			err = os.Chdir(dir + "/curseinstaller")
@@ -270,7 +273,7 @@ func getPacks() error {
 				return fmt.Errorf("failed to delete %s folder: %s", cursepack.Data.Name, err)
 			}
 
-			if cfg.Deploy {
+			if cfg.Deploy && !failed {
 				targetfolder := fmt.Sprintf("%s%s/", cursefolder, packname)
 				_, err = os.Stat(targetfolder + "/cover.png")
 				if os.IsNotExist(err) {
