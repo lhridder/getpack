@@ -216,8 +216,8 @@ packs:
     - delete:ServerStart.sh
   466761: #crazycraftupdated
     - delete:start.ps1
-    - forgegrep:start.sh
-    - renamereg:^forge-:server.jar
+    - variablesgrep:variables.txt
+    - delete:variables.txt
     - delete:start.sh
   290913: #stoneblock
     - delete:Install.bat
