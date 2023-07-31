@@ -107,17 +107,10 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:start.sh
   482878: #bettermcnew
-    - cdreg:^Better
     - delete:start.ps1
-    - forgegrep:start.sh
-    - delete:start.sh
-    - delete:run.bat
-  466901: #bettermcplus
-    - cdreg:^Better
-    - delete:start.ps1
+    - variablesgrep:variables.txt
+    - delete:variables.txt
     - delete:READ_ME.txt
-    - forgegrep:start.sh
-    - renamereg:^forge-:server.jar
     - delete:start.sh
   452013: #bettermcfabric
     - cdreg:^Better
@@ -125,6 +118,12 @@ packs:
     - delete:READ_ME.txt
     - fabric:1.19.2
     - delete:start.sh
+  466901: #prominence-2
+    - deletereg:^READ_ME
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+    - delete:start.ps1
   456356: #medievalmc
     - cdreg:^Medieval
     - delete:start.ps1
