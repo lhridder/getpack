@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -67,7 +68,12 @@ func Get(packid int) (*FTBpack, error) {
 
 	pack.Version = pack.Versions[len(pack.Versions)-1]
 	parts := strings.Split(pack.Version.Name, " ")
-	pack.Version.Name = parts[len(parts)-1]
+	for _, part := range parts {
+		if regexp.MustCompile(`\d`).MatchString(part) {
+			pack.Version.Name = part
+			break
+		}
+	}
 
 	pack.ServerPackURL = fmt.Sprintf("%s%d/%d/server/linux", base, packid, pack.Version.Id)
 

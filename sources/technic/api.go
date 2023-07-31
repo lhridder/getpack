@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"strings"
 )
 
@@ -48,7 +49,12 @@ func Get(packname string) (*TechnicPack, error) {
 	}
 
 	parts := strings.Split(pack.Version, " ")
-	pack.Version = parts[len(parts)-1]
+	for _, part := range parts {
+		if regexp.MustCompile(`\d`).MatchString(part) {
+			pack.Version = part
+			break
+		}
+	}
 
 	return pack, nil
 }

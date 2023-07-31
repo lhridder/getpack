@@ -6,6 +6,7 @@ import (
 	"getpack/config"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -120,7 +121,12 @@ func Get(packid int) (*Cursepack, error) {
 
 	pack.URL = url
 	parts := strings.Split(strings.ReplaceAll(latestfile.DisplayName, ".zip", ""), " ")
-	pack.Version = parts[len(parts)-1]
+	for _, part := range parts {
+		if regexp.MustCompile(`\d`).MatchString(part) {
+			pack.Version = part
+			break
+		}
+	}
 
 	return pack, nil
 }
