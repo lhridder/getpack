@@ -119,11 +119,16 @@ func Instructions(instructions []string) error {
 			forgeversion := ""
 			mcversion := ""
 			url := ""
+			mirror := ""
 
 			for _, line := range strings.Split(string(file), "\n") {
 				line = strings.TrimSpace(line)
 				if strings.HasPrefix(line, "FORGE_URL=") || strings.HasPrefix(line, "FORGE_INSTALLER_URL=") {
 					url = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MIRROR=") {
+					mirror = strings.Split(line, "\"")[1]
 					continue
 				}
 				if strings.HasPrefix(line, "FORGE_VERSION=") {
@@ -144,6 +149,10 @@ func Instructions(instructions []string) error {
 				url = fmt.Sprintf("%s%s/forge-%s-installer.jar", forge.Base, version, version)
 			} else {
 				url = strings.ReplaceAll(url, "$FORGE_VERSION", forgeversion)
+			}
+
+			if mirror != "" {
+				url = strings.ReplaceAll(url, "${MIRROR}", mirror)
 			}
 
 			err = util.Download(url, "forge-installer.jar")
