@@ -301,6 +301,12 @@ packs:
   846307: #createlive4
     - deletereg:mich.txt$
     - delete:eula.txt
+  845941: #create-re-flavored
+    - delete:user_jvm_args.txt
+    - delete:startserver.bat
+    - forgegrep:startserver.sh
+    - delete:startserver.sh
+    - delete:run.bat
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
