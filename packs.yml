@@ -307,6 +307,12 @@ packs:
     - forgegrep:startserver.sh
     - delete:startserver.sh
     - delete:run.bat
+  515345: #darkrpg
+    - delete:start.ps1
+    - delete:README!!!.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
