@@ -303,11 +303,16 @@ func Instructions(instructions []string) error {
 
 			modloader := ""
 			mcversion := ""
+			modloaderversion := ""
 
 			for _, line := range strings.Split(string(file), "\n") {
 				line = strings.TrimSpace(line)
 				if strings.HasPrefix(line, "MODLOADER=") {
 					modloader = strings.Split(line, "=")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MODLOADER_VERSION=") {
+					modloaderversion = strings.Split(line, "=")[1]
 					continue
 				}
 				if strings.HasPrefix(line, "MINECRAFT_VERSION=") {
@@ -316,7 +321,7 @@ func Instructions(instructions []string) error {
 			}
 
 			if modloader == "Fabric" {
-				err := fabricInstall(mcversion)
+				err := fabricInstall(mcversion, modloaderversion)
 				if err != nil {
 					return fmt.Errorf("failed to install fabric: %s", err)
 				}
@@ -380,9 +385,16 @@ func Instructions(instructions []string) error {
 			}
 		case "fabric":
 			mcversion := parts[1]
-			err := fabricInstall(mcversion)
-			if err != nil {
-				return fmt.Errorf("failed to install fabric: %s", err)
+			if len(parts) >= 3 {
+				err := fabricInstall(mcversion, parts[2])
+				if err != nil {
+					return fmt.Errorf("failed to install fabric: %s", err)
+				}
+			} else {
+				err := fabricInstall(mcversion, "")
+				if err != nil {
+					return fmt.Errorf("failed to install fabric: %s", err)
+				}
 			}
 		}
 		if config.Global.Debug {
@@ -392,7 +404,7 @@ func Instructions(instructions []string) error {
 	return nil
 }
 
-func fabricInstall(mcversion string) error {
+func fabricInstall(mcversion string, fabricversion string) error {
 	url, err := fabric.GetInstaller()
 	if err != nil {
 		return fmt.Errorf("failed to get fabric installer url: %s", err)
@@ -403,7 +415,12 @@ func fabricInstall(mcversion string) error {
 		return fmt.Errorf("failed to download installer: %s", err)
 	}
 
-	output, err := exec.Command("java", "-jar", "installer.jar", "server", "-mcversion", mcversion, "-downloadMinecraft").Output()
+	args := []string{"-jar", "installer.jar", "server", "-mcversion", mcversion, "-downloadMinecraft"}
+	if fabricversion != "" {
+		args = append(args, "-loader", fabricversion)
+	}
+
+	output, err := exec.Command("java", args...).Output()
 	if err != nil {
 		log.Println(string(output))
 		return fmt.Errorf("failed to run installer: %s", err)
