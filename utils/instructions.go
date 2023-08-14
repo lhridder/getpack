@@ -328,7 +328,7 @@ func Instructions(instructions []string) error {
 			}
 
 			if modloader == "Forge" {
-				err := forge.Install(mcversion)
+				err := forge.Install(mcversion, modloaderversion)
 				if err != nil {
 					return fmt.Errorf("failed to install forge: %s", err)
 				}
@@ -379,7 +379,7 @@ func Instructions(instructions []string) error {
 			}
 		case "forge":
 			mcversion := parts[1]
-			err := forge.Install(mcversion)
+			err := forge.Install(mcversion, "")
 			if err != nil {
 				return fmt.Errorf("failed to install forge: %s", err)
 			}

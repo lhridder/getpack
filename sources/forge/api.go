@@ -17,7 +17,12 @@ const (
 	Base        = "https://maven.minecraftforge.net/net/minecraftforge/forge/"
 )
 
-func GetURL(mcversion string) (string, string, error) {
+func GetURL(mcversion string, forgeversion string) (string, string, error) {
+	if forgeversion != "" {
+		version := fmt.Sprintf("%s-%s", mcversion, forgeversion)
+		return fmt.Sprintf("%s%s/forge-%s-installer.jar", Base, version, version), version, nil
+	}
+
 	res, err := http.Get(versionlist)
 	if err != nil {
 		return "", "", fmt.Errorf("failed to get json: %s", err)
@@ -38,9 +43,8 @@ func GetURL(mcversion string) (string, string, error) {
 		return "", "", fmt.Errorf("failed to unmarshal body: %s", err)
 	}
 
-	forgeversion := promos.Promos[fmt.Sprintf("%s-latest", mcversion)]
-
-	version := fmt.Sprintf("%s-%s", mcversion, forgeversion)
+	fversion := promos.Promos[fmt.Sprintf("%s-latest", mcversion)]
+	version := fmt.Sprintf("%s-%s", mcversion, fversion)
 
 	log.Printf("Found forge version %s", version)
 

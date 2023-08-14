@@ -38,7 +38,7 @@ func Get() error {
 			return fmt.Errorf("failed to go to mcversion folder: %s", err)
 		}
 
-		err = Install(mcversion)
+		err = Install(mcversion, "")
 		if err != nil {
 			return err
 		}
@@ -77,10 +77,10 @@ func Get() error {
 	return nil
 }
 
-func Install(mcversion string) error {
+func Install(mcversion string, forgeversion string) error {
 	start := time.Now()
 
-	url, version, err := GetURL(mcversion)
+	url, version, err := GetURL(mcversion, forgeversion)
 	if err != nil {
 		return fmt.Errorf("failed to get url: %s", err)
 	}
