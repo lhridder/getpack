@@ -113,6 +113,7 @@ packs:
     - delete:READ_ME.txt
     - delete:start.sh
   550864: #bettermc3-forge
+    - cdreg:^BMC3_FORGE
     - delete:start.ps1
     - variablesgrep:variables.txt
     - delete:variables.txt
@@ -256,7 +257,7 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:LaunchServer.bat
   829758: #dawncraft
-    - delete:SERVER_README.txt
+    - delete:README.txt
     - forge:1.18.2
   532141: #fantasyminecraft
     - delete:variables.txt
