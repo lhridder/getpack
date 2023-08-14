@@ -569,6 +569,7 @@ func getPacks() error {
 				}
 				if !present {
 					packdata.Versions = append(packdata.Versions, pack.Version)
+					list.Data[pack.Packname] = packdata
 				}
 			} else {
 				list.Data[pack.Packname] = data{
