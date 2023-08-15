@@ -72,6 +72,14 @@ packs:
     - forgegrep:startserver.sh
     - delete:run.bat
     - delete:startserver.sh
+  715572: #atm9
+    - cdreg:^Server
+    - deletereg:.bat$
+    - deletereg:.sh$
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - deletereg:installer.jar.log$
+    - delete:run.bat
   285109: #rlcraft
     - deletereg:.txt$
     - forge:1.12.2
