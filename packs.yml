@@ -322,6 +322,14 @@ packs:
     - variablesgrep:variables.txt
     - delete:variables.txt
     - delete:start.sh
+  282744: #enigmatica2expert
+    - delete:LICENSE.md
+    - delete:README.md
+    - delete:SERVER_GUIDE.txt
+    - delete:ServerStart.bat
+    - delete:ServerStartLinux.sh
+    - delete:settings.cfg
+    - forge:1.12.2
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
