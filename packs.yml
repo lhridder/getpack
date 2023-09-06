@@ -88,11 +88,9 @@ packs:
     - delete:LaunchServer.bat
     - renamereg:^forge-:server.jar
   623910: #fantasyrealm
-    - cdreg:^Fantasy
-    - delete:READ_ME.txt
     - delete:start.ps1
-    - forgegrep:start.sh
-    - renamereg:^forge-:server.jar
+    - variablesgrep:variables.txt
+    - delete:variables.txt
     - delete:start.sh
   389615: #pixelmon
     - deletereg:.bat$
