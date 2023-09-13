@@ -25,6 +25,13 @@ packs:
     - delete:LaunchServer.sh
     - delete:RestoreBackup.bat
     - delete:RestoreBackup.sh
+  1718228: #tekxit-314-official-1122
+    - cdreg:TekxitPiServer$
+    - delete:README.txt
+    - delete:eula.txt
+    - delete:ServerLinux.sh
+    - delete:ServerWindows.bat
+    - renamereg:^forge-:server.jar
   #curse
   353156: #1.12.2pack
     - deletereg:^RestoreBackup
