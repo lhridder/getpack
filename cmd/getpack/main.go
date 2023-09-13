@@ -570,7 +570,23 @@ func getPacks() error {
 					}
 				}
 				if !present {
-					packdata.Versions = append(packdata.Versions, pack.Version)
+					if len(packdata.Versions) > 1 {
+						last := packdata.Versions[len(packdata.Versions)-1]
+						for _, version := range packdata.Versions {
+							if version == last {
+								continue
+							}
+							path := fmt.Sprintf("%s/%s.zip", pack.Packname, version)
+							err = os.Remove(path)
+							if err != nil && err != os.ErrNotExist {
+								return fmt.Errorf("failed to delete old version: %s", err)
+							}
+						}
+
+						packdata.Versions = []string{last, pack.Version}
+					} else {
+						packdata.Versions = append(packdata.Versions, pack.Version)
+					}
 					list.Data[pack.Packname] = packdata
 				}
 			} else {
