@@ -4,8 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"getpack/config"
-	"io/ioutil"
-	"net/http"
+	"getpack/util"
 	"regexp"
 	"strconv"
 	"strings"
@@ -52,25 +51,12 @@ type cursefiles struct {
 const base = "https://api.curseforge.com/v1/"
 
 func Get(packid int) (*Cursepack, error) {
-	request, err := http.NewRequest("GET", fmt.Sprintf("%smods/%s", base, strconv.Itoa(packid)), nil)
-	if err != nil {
-		return nil, fmt.Errorf("failed to format request: %s", err)
-	}
-	request.Header.Set("x-api-key", config.Global.Curse.APIkey)
+	url := fmt.Sprintf("%smods/%s", base, strconv.Itoa(packid))
 
-	client := http.Client{}
-	res, err := client.Do(request)
+	header := map[string]string{"x-api-key": config.Global.Curse.APIkey}
+	body, err := util.Fetch(url, header)
 	if err != nil {
-		return nil, fmt.Errorf("failed to request pack json: %s", err)
-	}
-
-	if res.StatusCode != 200 {
-		return nil, fmt.Errorf("received non 200 status code: %s", res.Status)
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read response body: %s", err)
+		return nil, fmt.Errorf("failed to fetch: %s", err)
 	}
 
 	var pack *Cursepack
@@ -81,28 +67,15 @@ func Get(packid int) (*Cursepack, error) {
 
 	latestfile := pack.Data.LatestFiles[len(pack.Data.LatestFiles)-1]
 	if latestfile.ServerPackFileID == 0 {
-		request2, err := http.NewRequest("GET", fmt.Sprintf("%smods/%s/files", base, strconv.Itoa(packid)), nil)
-		if err != nil {
-			return nil, fmt.Errorf("failed to format request: %s", err)
-		}
-		request2.Header.Set("x-api-key", config.Global.Curse.APIkey)
+		url = fmt.Sprintf("%smods/%s/files", base, strconv.Itoa(packid))
 
-		res2, err := client.Do(request2)
+		body, err = util.Fetch(url, header)
 		if err != nil {
-			return nil, fmt.Errorf("failed to request pack files json: %s", err)
-		}
-
-		if res2.StatusCode != 200 {
-			return nil, fmt.Errorf("received non 200 status code: %s", res2.Status)
-		}
-
-		body2, err := ioutil.ReadAll(res2.Body)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read response body: %s", err)
+			return nil, fmt.Errorf("failed to fetch: %s", err)
 		}
 
 		var files cursefiles
-		err = json.Unmarshal(body2, &files)
+		err = json.Unmarshal(body, &files)
 		if err != nil {
 			return nil, fmt.Errorf("failed to unmarshal json: %s", err)
 		}
@@ -114,12 +87,12 @@ func Get(packid int) (*Cursepack, error) {
 		}
 	}
 
-	url, err := getServerPackURL(packid, latestfile.ServerPackFileID)
+	serverpackurl, err := getServerPackURL(packid, latestfile.ServerPackFileID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get server pack url: %s", err)
 	}
 
-	pack.URL = url
+	pack.URL = serverpackurl
 	parts := strings.Split(strings.ReplaceAll(latestfile.DisplayName, ".zip", ""), " ")
 	for _, part := range parts {
 		if regexp.MustCompile(`\d`).MatchString(part) {
@@ -134,25 +107,12 @@ func Get(packid int) (*Cursepack, error) {
 }
 
 func getServerPackURL(packid int, serverpackid int) (string, error) {
-	request, err := http.NewRequest("GET", fmt.Sprintf("%smods/%s/files/%s/download-url", base, strconv.Itoa(packid), strconv.Itoa(serverpackid)), nil)
-	if err != nil {
-		return "", fmt.Errorf("failed to format request: %s", err)
-	}
-	request.Header.Set("x-api-key", config.Global.Curse.APIkey)
+	url := fmt.Sprintf("%smods/%s/files/%s/download-url", base, strconv.Itoa(packid), strconv.Itoa(serverpackid))
 
-	client := http.Client{}
-	res, err := client.Do(request)
+	header := map[string]string{"x-api-key": config.Global.Curse.APIkey}
+	body, err := util.Fetch(url, header)
 	if err != nil {
-		return "", fmt.Errorf("failed to request: %s", err)
-	}
-
-	if res.StatusCode != 200 {
-		return "", fmt.Errorf("received non 200 status code: %s", res.Status)
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return "", fmt.Errorf("failed to read response body: %s", err)
+		return "", fmt.Errorf("failed to fetch: %s", err)
 	}
 
 	var serverpack serverpack

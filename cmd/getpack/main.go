@@ -20,6 +20,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type packversion struct {
@@ -345,6 +346,7 @@ func getPacks() error {
 		}
 
 		for _, pack := range cfg.Technic.Modpacks {
+			time.Sleep(time.Second)
 			log.Println("")
 			log.Printf("Starting install of technic modpack %s", pack)
 			technicpack, err := technic.Get(pack)

@@ -3,12 +3,11 @@ package util
 import (
 	"fmt"
 	"io"
-	"net/http"
 	"os"
 )
 
 func Download(url string, filename string) error {
-	res, err := http.Get(url)
+	res, err := Get(url, nil)
 	if err != nil {
 		return fmt.Errorf("failed to get jar: %s", err)
 	}

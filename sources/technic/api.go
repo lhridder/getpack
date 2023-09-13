@@ -3,8 +3,7 @@ package technic
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
+	"getpack/util"
 	"regexp"
 	"strings"
 )
@@ -28,18 +27,9 @@ const (
 )
 
 func Get(packname string) (*TechnicPack, error) {
-	res, err := http.Get(base + packname + suffix)
+	body, err := util.Fetch(base+packname+suffix, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get json: %s", err)
-	}
-
-	if res.StatusCode != 200 {
-		return nil, fmt.Errorf("got non 200 status code: %s", res.Status)
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read body: %s", err)
 	}
 
 	var pack *TechnicPack
