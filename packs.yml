@@ -270,7 +270,7 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:LaunchServer.bat
   829758: #dawncraft
-    - delete:SERVER_README.txt
+    - delete:README.txt
     - forge:1.18.2
   532141: #fantasyminecraft
     - delete:variables.txt
