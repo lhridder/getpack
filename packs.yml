@@ -386,3 +386,8 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:start.sh
     - delete:version.json
+  120: #genesis
+    - delete:log4jfix/
+    - shforgegrep:start.sh
+    - delete:start.sh
+    - delete:version.json
