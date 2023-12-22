@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"getpack/config"
 	"getpack/discord"
@@ -578,7 +579,7 @@ func getPacks() error {
 							}
 							path := fmt.Sprintf("%s/%s.zip", pack.Packname, version)
 							err = os.Remove(path)
-							if err != nil && err != os.ErrNotExist {
+							if err != nil && !errors.Is(err, os.ErrNotExist) {
 								return fmt.Errorf("failed to delete old version: %s", err)
 							}
 						}
