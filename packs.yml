@@ -91,7 +91,7 @@ packs:
     - deletereg:.txt$
     - forge:1.12.2
   349129: #mceternal
-    - cdreg:^MC_Eternal
+    - cdreg:^MCE
     - delete:LaunchServer.bat
     - renamereg:^forge-:server.jar
   623910: #fantasyrealm
