@@ -277,11 +277,18 @@ packs:
     - delete:start.sh
     - delete:start.ps1
     - fabric:1.19.2
-  848718: #bigchadguysplus
+  848718: #bigchadguys-and-the-holy-grail
     - delete:eula.txt
     - delete:help.txt
     - delete:startserver.bat
     - renamereg:^fabric-server:server.jar
+  904321: #bigchadguys-plus
+    - delete:eula.txt
+    - delete:start.bat
+    - delete:start.sh
+    - delete:fabric-server-launch.jar
+    - delete:server.jar
+    - fabric:1.20.1
   868307: #newlifesmp
     - delete:start.bat
     - renamereg:^fabric-server:server.jar
