@@ -286,9 +286,8 @@ packs:
     - delete:eula.txt
     - delete:start.bat
     - delete:start.sh
-    - delete:fabric-server-launch.jar
-    - delete:server.jar
-    - fabric:1.20.1
+    - rename:server.jar:vanilla.jar
+    - rename:fabric-server-launch.jar:server.jar
   868307: #newlifesmp
     - delete:start.bat
     - renamereg:^fabric-server:server.jar
