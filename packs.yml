@@ -152,8 +152,13 @@ packs:
     - variablesgrep:variables.txt
     - delete:variables.txt
     - delete:start.sh
-  466901: #prominence-2
+  466901: #prominence2-fabric
     - deletereg:^READ_ME
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+    - delete:start.ps1
+  574291: #prominence2-forge
     - variablesgrep:variables.txt
     - delete:variables.txt
     - delete:start.sh
