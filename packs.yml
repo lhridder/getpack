@@ -215,6 +215,14 @@ packs:
     - forgegrep:startserver.sh
     - renamereg:^forge-:server.jar
     - delete:startserver.sh
+  897691: #ragnamod-7
+    - delete:eula.txt
+    - delete:startserver.bat
+    - delete:startserver.sh
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - deletereg:installer.jar.log$
+    - delete:run.bat
   296062: #skyfactory4
     - delete:Install.bat
     - delete:Install.sh
