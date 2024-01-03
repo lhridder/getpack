@@ -275,9 +275,9 @@ packs:
     - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
   545167: #dreamcraft-new
-    - cdreg:^1.19.2
+    - cdreg:^1.20.1
     - delete:README.txt
-    - fabric:1.19.2
+    - fabric:1.20.1
   402412: #litv2
     - cdreg:^LITV2-Serverpack
     - renamereg:^forge-:server.jar
