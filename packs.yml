@@ -201,14 +201,6 @@ packs:
     - variablesgrep:variables.txt
     - delete:variables.txt
     - delete:start.sh
-  844844: #createflavored
-    - deletereg:^CHANGELOG
-    - delete:SERVER-START.bat
-    - delete:user_jvm_args.txt
-    - delete:README.txt
-    - forgegrep:SERVER-START.sh
-    - delete:SERVER-START.sh
-    - delete:run.bat
   510649: #ragnamod6
     - delete:eula.txt
     - delete:startserver.bat
@@ -257,10 +249,6 @@ packs:
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - delete:1.12.2.json
-    - renamereg:^forge-:server.jar
-  542763: #create
-    - javarun:installer.jar$:--installServer
-    - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
   268208: #sevtechages
     - delete:Install.bat
@@ -331,9 +319,21 @@ packs:
     - delete:Launch.bat
     - delete:options.txt
     - delete:eula.txt
+  542763: #create
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - renamereg:^forge-:server.jar
   846307: #createlive4
     - deletereg:mich.txt$
     - delete:eula.txt
+  844844: #createflavored
+    - deletereg:^CHANGELOG
+    - delete:SERVER-START.bat
+    - delete:user_jvm_args.txt
+    - delete:README.txt
+    - forgegrep:SERVER-START.sh
+    - delete:SERVER-START.sh
+    - delete:run.bat
   845941: #create-re-flavored
     - delete:user_jvm_args.txt
     - delete:startserver.bat
