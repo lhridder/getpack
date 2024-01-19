@@ -354,6 +354,12 @@ packs:
     - delete:ServerStartLinux.sh
     - delete:settings.cfg
     - forge:1.12.2
+  887839: #fear-nightfall
+    - delete:READ_ME.txt
+    - delete:start.ps1
+    - delete:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
