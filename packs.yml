@@ -360,6 +360,12 @@ packs:
     - delete:start.sh
     - variablesgrep:variables.txt
     - delete:variables.txt
+  643605: #steampunk
+    - delete:READ_ME.txt
+    - delete:start.ps1
+    - delete:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
