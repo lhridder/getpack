@@ -340,11 +340,6 @@ packs:
     - forgegrep:startserver.sh
     - delete:startserver.sh
     - delete:run.bat
-  519787: #create-plus
-    - deletereg:.txt$
-    - javarun:installer.jar$:--installServer
-    - deletereg:installer.jar$
-    - deletereg:installer.jar.log$
   515345: #darkrpg
     - delete:start.ps1
     - delete:README!!!.txt
