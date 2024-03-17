@@ -271,8 +271,11 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:LaunchServer.bat
   829758: #dawncraft
-    - delete:README.txt
-    - forge:1.18.2
+    - delete:SERVER_README.txt
+    - delete:start.ps1
+    - delete:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
   532141: #fantasyminecraft
     - delete:variables.txt
     - delete:start.sh
