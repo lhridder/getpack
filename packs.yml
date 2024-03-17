@@ -211,10 +211,8 @@ packs:
     - delete:eula.txt
     - delete:startserver.bat
     - delete:startserver.sh
-    - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
-    - deletereg:installer.jar.log$
-    - delete:run.bat
+    - forge:1.18.2
   296062: #skyfactory4
     - delete:Install.bat
     - delete:Install.sh
