@@ -304,8 +304,7 @@ packs:
     - delete:ServerStart.sh
   878495: #valhelsia-6
     - javarun:installer.jar$:--installServer
-    - deletereg:installer.jar$
-    - renamereg:^forge-:server.jar
+    - deletereg:installer.jar.log$
     - delete:ServerStart.sh
     - delete:ServerStart.bat
     - delete:README.txt
