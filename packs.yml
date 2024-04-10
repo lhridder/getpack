@@ -226,11 +226,6 @@ packs:
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
-  496007: #valhelsiaenhancedvanilla
-    - delete:README.txt
-    - delete:ServerStart.bat
-    - fabricrun:ServerStart.sh
-    - delete:ServerStart.sh
   466761: #crazycraftupdated
     - delete:start.ps1
     - variablesgrep:variables.txt
@@ -297,6 +292,18 @@ packs:
     - renamereg:^forge-:server.jar
     - delete:start.bat
   388169: #valhelsia-3
+    - javarun:installer.jar$:--installServer
+    - deletereg:installer.jar$
+    - renamereg:^forge-:server.jar
+    - delete:ServerStart.sh
+    - delete:ServerStart.bat
+    - delete:README.txt
+  496007: #valhelsiaenhancedvanilla
+    - delete:README.txt
+    - delete:ServerStart.bat
+    - fabricrun:ServerStart.sh
+    - delete:ServerStart.sh
+  878495: #valhelsia-6
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
