@@ -377,6 +377,11 @@ packs:
     - delete:start.sh
     - variablesgrep:variables.txt
     - delete:variables.txt
+  869213: #mystical-block
+    - delete:start.ps1
+    - delete:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
