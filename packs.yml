@@ -33,6 +33,9 @@ packs:
     - delete:ServerWindows.bat
     - renamereg:^forge-:server.jar
   #curse
+  952976: #cavehorror
+    - delete:run.bat
+    - delete:eula.txt
   353156: #1.12.2pack
     - deletereg:^RestoreBackup
     - deletereg:^LaunchServer
