@@ -91,22 +91,19 @@ packs:
     - deletereg:installer.jar.log$
     - delete:run.bat
   967745: #atm-9-sky
-    - cdreg:^server
-    - deletereg:.bat$
-    - deletereg:.sh$
+    - cdreg:^1
+    - delete:startserver.bat
+    - delete:startserver.sh
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - deletereg:installer.jar.log$
     - delete:run.bat
   959010: #atm-9-no-frills
-    - cdreg:^Server
     - delete:user_jvm_args.txt
-    - deletereg:.bat$
-    - deletereg:.sh$
-    - javarun:installer.jar$:--installServer
-    - deletereg:installer.jar$
-    - deletereg:installer.jar.log$
+    - delete:startserver.bat
+    - forgegrep:startserver.sh
     - delete:run.bat
+    - delete:startserver.sh
   285109: #rlcraft
     - deletereg:.txt$
     - forge:1.12.2
