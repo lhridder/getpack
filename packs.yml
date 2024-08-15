@@ -396,6 +396,12 @@ packs:
     - delete:start.sh
     - variablesgrep:variables.txt
     - delete:variables.txt
+  888414: #the-chocolate-edition
+    - deletereg:^HOW
+    - delete:start.ps1
+    - delete:start.sh
+    - variablesgrep:variables.txt
+    - delete:variables.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
