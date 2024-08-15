@@ -93,7 +93,10 @@ func Get(packid int) (*Cursepack, error) {
 	}
 
 	pack.URL = serverpackurl
-	parts := strings.Split(strings.ReplaceAll(latestfile.DisplayName, ".zip", ""), " ")
+	name := strings.ReplaceAll(latestfile.DisplayName, ".zip", "")
+	pack.Version = name
+
+	parts := strings.Split(name, " ")
 	for _, part := range parts {
 		if regexp.MustCompile(`\d`).MatchString(part) {
 			//TODO integrate into regex
