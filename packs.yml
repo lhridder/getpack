@@ -402,6 +402,11 @@ packs:
     - delete:start.sh
     - variablesgrep:variables.txt
     - delete:variables.txt
+  939441: #industrial-village
+    - cdreg:^IV
+    - delete:run.bat
+    - delete:IV-serversetup.txt
+    - deletereg:.json$
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
