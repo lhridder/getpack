@@ -99,7 +99,6 @@ packs:
     - deletereg:installer.jar.log$
     - delete:run.bat
   959010: #atm-9-no-frills
-    - delete:user_jvm_args.txt
     - delete:startserver.bat
     - forgegrep:startserver.sh
     - delete:run.bat
