@@ -378,9 +378,10 @@ packs:
     - variablesgrep:variables.txt
     - delete:variables.txt
   643605: #steampunk
-    - delete:READ_ME.txt
-    - delete:start.ps1
-    - delete:start.sh
+    - delete:HOW-TO-RUN.md
+    - deletereg:.ps1$
+    - deletereg:.sh$
+    - delete:start.bat
     - variablesgrep:variables.txt
     - delete:variables.txt
   869213: #mystical-block
