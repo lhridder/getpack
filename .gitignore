@@ -2,3 +2,4 @@
 dist/
 config.yml
 *installer/
+log.txt

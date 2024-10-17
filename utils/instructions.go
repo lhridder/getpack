@@ -334,7 +334,7 @@ func Instructions(instructions []string) error {
 				}
 			}
 		case "bashrun":
-			output, err := exec.Command("bash", parts[1]).Output()
+			output, err := exec.Command("bash", "-c", parts[1]).Output()
 			if err != nil {
 				log.Println(string(output))
 				return fmt.Errorf("failed to bashrun for %s: %s", instruction, err)

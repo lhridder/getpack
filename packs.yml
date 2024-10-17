@@ -407,6 +407,10 @@ packs:
     - delete:run.bat
     - delete:IV-serversetup.txt
     - deletereg:.json$
+  919384: #create-perfect-world
+    - cdreg:^Perfect
+    - forge:1.20.1
+    - 'bashrun:rm ./mods/neruina*.jar'
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
