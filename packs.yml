@@ -411,6 +411,18 @@ packs:
     - cdreg:^Perfect
     - forge:1.20.1
     - 'bashrun:rm ./mods/neruina*.jar'
+  490660: #deceasedcraft
+    - cdreg:^DeceasedCraft
+    - forge:1.18.2
+  826731: #bettermc3-fabric
+    - delete:start.ps1
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
+    - delete:start.sh
+  963337: #conquest-of-dragons
+    - delete:start.ps1
+    - variablesgrep:variables.txt
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
