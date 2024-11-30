@@ -242,11 +242,6 @@ packs:
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - renamereg:^forge-:server.jar
-  466761: #crazycraftupdated
-    - delete:start.ps1
-    - delete:start.sh
-    - delete:variables.txt
-    - renamereg:^forge:server.jar
   290913: #stoneblock
     - delete:Install.bat
     - delete:Install.sh
