@@ -373,10 +373,12 @@ packs:
     - delete:settings.cfg
     - forge:1.12.2
   887839: #fear-nightfall
-    - delete:start.ps1
-    - delete:start.sh
-    - variablesgrep:variables.txt
+    - deletereg:^start
+    - deletereg:^install
+    - delete:HOW-TO-RUN.md
+    - delete:manifest.json
     - delete:variables.txt
+    - forge:1.20.1
   643605: #steampunk
     - delete:HOW-TO-RUN.md
     - deletereg:.ps1$
