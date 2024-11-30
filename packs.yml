@@ -168,6 +168,13 @@ packs:
     - variablesgrep:variables.txt
     - delete:variables.txt
     - delete:start.sh
+  826731: #bettermc3-fabric
+    - deletereg:^start
+    - deletereg:^install
+    - deletereg:^download
+    - delete:READ_ME.txt
+    - variablesgrep:variables.txt
+    - delete:variables.txt
   466901: #prominence2-fabric
     - deletereg:^READ_ME
     - variablesgrep:variables.txt
@@ -404,6 +411,17 @@ packs:
     - delete:run.bat
     - delete:IV-serversetup.txt
     - deletereg:.json$
+  919384: #create-perfect-world
+    - cdreg:^Perfect
+    - forge:1.20.1
+  490660: #deceasedcraft
+    - cdreg:^DeceasedCraft
+    - deletereg:^run
+    - delete:readme.txt
+    - delete:user_jvm_args.txt
+    - javarun:installer.jar$:--installServer
+    - delete:run.bat
+    - deletereg:^forge-
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
