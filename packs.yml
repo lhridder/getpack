@@ -43,8 +43,7 @@ packs:
   289267: #rad
     - cdreg:^RAD-Serverpack
     - deletereg:^LaunchServer
-    - delete:README-howto.txt
-    - delete:eula.txt
+    - delete:rad1serversetup.txt
     - renamereg:^forge-:server.jar
   572778: #rad2
     - cdreg:^RAD2-Serverpack
