@@ -96,7 +96,6 @@ packs:
     - javarun:installer.jar$:--installServer
     - deletereg:installer.jar$
     - deletereg:installer.jar.log$
-    - delete:run.bat
   959010: #atm-9-no-frills
     - delete:startserver.bat
     - forgegrep:startserver.sh
@@ -421,6 +420,12 @@ packs:
     - javarun:installer.jar$:--installServer
     - delete:run.bat
     - deletereg:^forge-
+  370666: #divine-journey
+    - delete:launch.bat
+    - renamereg:^forge-:server.jar
+  925200: #atm-10
+    - cdreg:^Server
+    - neoforgegrep:startserver.sh
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
