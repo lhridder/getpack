@@ -96,6 +96,9 @@ See practical examples in packs.yml
 #### forgegrep
 `forgegrep:filename` read specified file, search for forge version and install it.
 
+### neoforgegrep
+`neoforgegrep:filename` read specified file, search for neoforge version and install it
+
 #### fabricgrep
 `fabricgrep:filename` read specified file, search for fabric version and install it.
 

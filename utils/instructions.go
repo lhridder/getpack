@@ -186,6 +186,82 @@ func Instructions(instructions []string) error {
 					return fmt.Errorf("failed to remove installer log: %s", err)
 				}
 			}
+		case "neoforgegrep":
+			file, err := ioutil.ReadFile(parts[1])
+			if err != nil {
+				return fmt.Errorf("cant read file: %s", err)
+			}
+
+			forgeversion := ""
+			mcversion := ""
+			url := ""
+			mirror := ""
+
+			for _, line := range strings.Split(string(file), "\n") {
+				line = strings.TrimSpace(line)
+				if strings.HasPrefix(line, "NEOFORGE_URL=") || strings.HasPrefix(line, "NEOFORGE_INSTALLER_URL=") {
+					url = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MIRROR=") {
+					mirror = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "NEOFORGE_VERSION=") {
+					forgeversion = strings.Split(line, "=")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MODLOADER_VERSION=") || strings.HasPrefix(line, "NEOFORGE=") {
+					forgeversion = strings.Split(line, "\"")[1]
+					continue
+				}
+				if strings.HasPrefix(line, "MINECRAFT_VERSION=") || strings.HasPrefix(line, "MINECRAFT=") {
+					mcversion = strings.Split(line, "\"")[1]
+				}
+			}
+
+			if mcversion != "" {
+				version := fmt.Sprintf("%s-%s", mcversion, forgeversion)
+				url = fmt.Sprintf("%s%s/neoforge-%s-installer.jar", forge.Base, version, version)
+			} else {
+				url = strings.ReplaceAll(url, "$NEOFORGE_VERSION", forgeversion)
+			}
+
+			if mirror != "" {
+				url = strings.ReplaceAll(url, "${MIRROR}", mirror)
+			}
+
+			err = util.Download(url, "neoforge-installer.jar")
+			if err != nil {
+				return fmt.Errorf("failed to download neoforge installer: %s", err)
+			}
+
+			output, err := exec.Command("java", "-jar", "neoforge-installer.jar", "--installServer").Output()
+			if err != nil {
+				log.Println(string(output))
+				return fmt.Errorf("failed to run installer: %s", err)
+			}
+
+			err = os.Remove("neoforge-installer.jar")
+			if err != nil {
+				return fmt.Errorf("failed to remove installer: %s", err)
+			}
+
+			_, err = os.Stat("installer.log")
+			if err == nil {
+				err = os.Remove("installer.log")
+				if err != nil {
+					return fmt.Errorf("failed to remove installer log: %s", err)
+				}
+			}
+
+			_, err = os.Stat("neoforge-installer.jar.log")
+			if err == nil {
+				err = os.Remove("neoforge-installer.jar.log")
+				if err != nil {
+					return fmt.Errorf("failed to remove installer log: %s", err)
+				}
+			}
 		case "fabricgrep":
 			file, err := ioutil.ReadFile(parts[1])
 			if err != nil {
