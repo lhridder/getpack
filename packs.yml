@@ -426,6 +426,13 @@ packs:
   925200: #atm-10
     - cdreg:^Server
     - neoforgegrep:startserver.sh
+  821748: #cobblemon
+    - renamereg:^fabric-:server.jar
+    - delete:start.bat
+    - delete:start.sh
+  725514: #create-potato-pc-sky
+    - delete:start.ps1
+    - forgegrep:start.sh
   #ftb
   4: #stoneblock2
     - delete:log4jfix/
